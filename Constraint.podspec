@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'Constraint'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of Constraint.'
+  s.summary          = 'Constraint is a simple Swift wrapper for iOS Auto Layout that has a very natural syntax.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Constraint is a simple Swift wrapper for iOS Auto Layout that has a very natural syntax. You can either create layouts directly using the `Constraint` class methods or use the extensions on `UIView` related classes.
                        DESC
 
   s.homepage         = 'https://github.com/lucasvandongen/Constraint'
@@ -26,9 +26,10 @@ TODO: Add long description of the pod here.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'lucasvandongen' => 'lucas.van.dongen@gmail.com' }
   s.source           = { :git => 'https://github.com/lucasvandongen/Constraint.git', :tag => s.version.to_s }
+  s.swift_version = '4.0'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '11.0'
 
   s.source_files = 'Constraint/Classes/**/*'
   

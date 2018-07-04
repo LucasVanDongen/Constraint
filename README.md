@@ -32,6 +32,13 @@ Sometimes you need to store the constraints that are generated. In this case you
     
 In this case you will have to add the constraint manually to the view. It's the maximum amount of flexibility but a bit more work.
 
+## Known issues and TODO's
+This is the `0.1` release of this library but it already has been used in a few projects internally and all of the major kinks have been worked out. The following issues exist:
+
+* Not all class funcs on `Constraint` return `NSLayoutConstraint` or `[NSLayoutConstraint]` yet
+* The Fluent API hasn't been used everywhere yet
+* The API might undergo some name changes, for example probably `snap` will be deprecated in favor of a simple variant of `attach`
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.

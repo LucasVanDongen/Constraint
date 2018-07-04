@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Constraint_Example' do
+  pod 'Constraint', :path => '../'
+
+  target 'Constraint_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase' , '~> 2.1.4'
+  end
+end

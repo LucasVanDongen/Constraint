@@ -31,7 +31,7 @@ Constraint is a simple Swift wrapper for iOS Auto Layout that has a very natural
 
   s.ios.deployment_target = '11.0'
 
-  s.source_files = 'Constraint/Classes/**/*'
+  s.source_files = 'Classes/**/*.swift'
   
   # s.resource_bundles = {
   #   'Constraint' => ['Constraint/Assets/*.png']

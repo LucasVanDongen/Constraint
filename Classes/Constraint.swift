@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class Constraint: NSObject {
+public class Constraint {
     static let excludedViewClasses = ["UITableViewCellContentView"]
     static let excludedParentViewClasses = ["UIViewControllerWrapperView"]
 

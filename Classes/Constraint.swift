@@ -208,27 +208,24 @@ public class Constraint: NSObject {
     @discardableResult
     public class func attach(view: UIView,
                              inside containingView: UIView,
-                             top: Offset? = nil,
-                             left: Offset? = nil,
-                             bottom: Offset? = nil,
-                             right: Offset? = nil) -> [NSLayoutConstraint] {
+                             top: Offsetable? = nil,
+                             left: Offsetable? = nil,
+                             bottom: Offsetable? = nil,
+                             right: Offsetable? = nil) -> [NSLayoutConstraint] {
         clean(views: [view, containingView])
         var constraints = [NSLayoutConstraint]()
 
         if let top = top {
             let topConstraint: NSLayoutConstraint
-            switch top.respectingLayoutGuide {
-            case true:
-                let margins = containingView.layoutMarginsGuide
-                topConstraint = view.topAnchor.constraint(equalTo: margins.topAnchor, constant: top.offset)
-            case false:
-                topConstraint = NSLayoutConstraint(item: view,
-                                                   attribute: .top,
-                                                   relatedBy: top.relation.layoutRelation,
-                                                   toItem: containingView,
-                                                   attribute: .top,
-                                                   multiplier: 1,
-                                                   constant: top.offset)
+            let margins = top.respectingLayoutGuide ? containingView.layoutMarginsGuide.topAnchor :
+                containingView.topAnchor
+            switch top.relation {
+            case .exactly:
+                topConstraint = view.topAnchor.constraint(equalTo: margins, constant: top.offset)
+            case .orLess:
+                topConstraint = view.topAnchor.constraint(lessThanOrEqualTo: margins, constant: top.offset)
+            case .orMore:
+                topConstraint = view.topAnchor.constraint(greaterThanOrEqualTo: margins, constant: top.offset)
             }
             topConstraint.priority = top.priority
             constraints.append(topConstraint)

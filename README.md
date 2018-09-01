@@ -12,14 +12,20 @@ Usually you will use the `Constraint` library on the (descendant class of) `UIVi
 
 ```        
 icon
-    .attach(top: Offset(20),
-            left: Offset(10),
-            bottom: Offset(0),
-            right: Offset(10)
+    .attach(top: 20,
+            left: 10,
+            bottom: 0,
+            right: 10)
     .size(width: 24, height: 24)
 ```
 
-The constraints will automatically be added to the correct views.
+Also there's the possibility to add various modifiers to offset constraints:
+
+```
+image.attach(top: 0.orMore, bottom: 12.defaultLowPriority)
+// These are also chainable
+label.attach(bottom: 0.orMore.priorityUpdated(to: UILayoutPriority(800))
+```
 
 ### As a generator for constraints
 Sometimes you need to store the constraints that are generated. In this case you need to call the static methods on the `Constraint` class directly as follows:

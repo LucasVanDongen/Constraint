@@ -41,6 +41,22 @@ public class Constraint: NSObject {
                                   constant: distance)
     }
 
+    class func align(_ viewToAlign: UIView,
+                     _ sides: [Side],
+                     _ distance: CGFloat = 0,
+                     relation: NSLayoutRelation = .equal,
+                     to viewToAlignTo: UIView) -> [NSLayoutConstraint] {
+        return sides.map { side -> NSLayoutConstraint in
+            NSLayoutConstraint(item: viewToAlign,
+                               attribute: side.attribute,
+                               relatedBy: relation,
+                               toItem: viewToAlignTo,
+                               attribute: side.attribute,
+                               multiplier: 1,
+                               constant: distance)
+        }
+    }
+
     class func center(_ viewToCenter: UIView,
                       in viewToCenterTo: UIView,
                       axis: CenterAxis = .both,

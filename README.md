@@ -21,7 +21,7 @@ icon
 
 Also there's the possibility to add various modifiers to offset constraints:
 
-```swift
+```
 image.attach(top: 0.orMore, bottom: 12.defaultLowPriority)
 // These are also chainable
 label.attach(bottom: 0.orMore.priorityUpdated(to: UILayoutPriority(800))

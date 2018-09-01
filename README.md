@@ -21,7 +21,7 @@ icon
 
 Also there's the possibility to add various modifiers to offset constraints:
 
-```
+```swift
 image.attach(top: 0.orMore, bottom: 12.defaultLowPriority)
 // These are also chainable
 label.attach(bottom: 0.orMore.priorityUpdated(to: UILayoutPriority(800))
@@ -69,7 +69,7 @@ Center lets you center the view inside another view, where it defaults to the `s
 
 Usage:
 
-```Swift
+```swift
 view.center(axis: .both) // Centers the view on both the X and Y axis of it's superview
 view.center(to: anotherView, axis: .x, adjusted: 10, priority: .defaultLow) // Wants to center it's X to anotherView, then adjusts it +10 pixels and applies a low priority to it
 ```
@@ -77,17 +77,17 @@ view.center(to: anotherView, axis: .x, adjusted: 10, priority: .defaultLow) // W
 Works pretty much the same as `center` actually and one of both might be depracated in the future in favor of the other. It aligns with another view which is not it's superview.
 
 Usage
-```Swift
+```swift
 view.align(axis: .x, to: anotherView, adjustment: 10) // Wants to center it's X to anotherView, then adjusts it +10 pixels
 ```
 
 It also allows you to align a side instead of the middle:
-```Swift
+```swift
 view.align(.left, 12, otherView) // Aligns it's left side to the left side of otherView + 12 pixels
 ```
 
 If you want to align multiple sides (much like `align` does) you can do this too:
-```Swift
+```swift
 view.align([.top, .left, .bottom], 0, to: otherView)
 ```
 
@@ -95,7 +95,7 @@ view.align([.top, .left, .bottom], 0, to: otherView)
 Space the view to another view in any direction.
 
 Usage
-```
+```swift
 registerButton
     .space(20, .above, reconfirmButton)
     .space(8, .below, usernameLabel, .orMore, priority: .defaultLow)

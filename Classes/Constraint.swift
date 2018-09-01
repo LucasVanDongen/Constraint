@@ -11,10 +11,10 @@ public class Constraint: NSObject {
     static let excludedViewClasses = ["UITableViewCellContentView"]
     static let excludedParentViewClasses = ["UIViewControllerWrapperView"]
 
-    class func align(_ viewToAlign: UIView,
-                     _ axis: CenterAxis,
-                     to viewToAlignTo: UIView,
-                     adjustment: CGFloat = 0.0) -> [NSLayoutConstraint] {
+    public class func align(_ viewToAlign: UIView,
+                            _ axis: CenterAxis,
+                            to viewToAlignTo: UIView,
+                            adjustment: CGFloat = 0.0) -> [NSLayoutConstraint] {
 
         return axis.attributes.map { attribute in
             return NSLayoutConstraint(item: viewToAlign,
@@ -27,11 +27,11 @@ public class Constraint: NSObject {
         }
     }
 
-    class func align(_ viewToAlign: UIView,
-                     _ side: Side,
-                     _ distance: CGFloat = 0,
-                     relation: NSLayoutRelation = .equal,
-                     to viewToAlignTo: UIView) -> NSLayoutConstraint {
+    public class func align(_ viewToAlign: UIView,
+                            _ side: Side,
+                            _ distance: CGFloat = 0,
+                            relation: NSLayoutRelation = .equal,
+                            to viewToAlignTo: UIView) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: viewToAlign,
                                   attribute: side.attribute,
                                   relatedBy: relation,
@@ -41,11 +41,11 @@ public class Constraint: NSObject {
                                   constant: distance)
     }
 
-    class func align(_ viewToAlign: UIView,
-                     _ sides: [Side],
-                     _ distance: CGFloat = 0,
-                     relation: NSLayoutRelation = .equal,
-                     to viewToAlignTo: UIView) -> [NSLayoutConstraint] {
+    public class func align(_ viewToAlign: UIView,
+                            _ sides: [Side],
+                            _ distance: CGFloat = 0,
+                            relation: NSLayoutRelation = .equal,
+                            to viewToAlignTo: UIView) -> [NSLayoutConstraint] {
         return sides.map { side -> NSLayoutConstraint in
             NSLayoutConstraint(item: viewToAlign,
                                attribute: side.attribute,
@@ -57,11 +57,11 @@ public class Constraint: NSObject {
         }
     }
 
-    class func center(_ viewToCenter: UIView,
-                      in viewToCenterTo: UIView,
-                      axis: CenterAxis = .both,
-                      adjusted: CGFloat = 0.0,
-                      priority: UILayoutPriority = UILayoutPriority.required) {
+    public class func center(_ viewToCenter: UIView,
+                             in viewToCenterTo: UIView,
+                             axis: CenterAxis = .both,
+                             adjusted: CGFloat = 0.0,
+                             priority: UILayoutPriority = UILayoutPriority.required) {
         clean(views: [viewToCenter, viewToCenterTo])
 
         if axis != .y {
@@ -89,10 +89,10 @@ public class Constraint: NSObject {
         }
     }
 
-    class func height(_ size: CGFloat,
-                      _ relation: Relation = .exactly,
-                      for view: UIView,
-                      priority: UILayoutPriority = UILayoutPriority.required) -> NSLayoutConstraint {
+    public class func height(_ size: CGFloat,
+                             _ relation: Relation = .exactly,
+                             for view: UIView,
+                             priority: UILayoutPriority = UILayoutPriority.required) -> NSLayoutConstraint {
         clean(views: [view])
         let constraint = NSLayoutConstraint(item: view,
                                             attribute: .height,
@@ -107,11 +107,11 @@ public class Constraint: NSObject {
         return constraint
     }
 
-    class func width(of view: UIView,
-                     theSame relation: Relation = .exactly,
-                     than otherView: UIView,
-                     multipliedBy multiplier: CGFloat = 1.0,
-                     priority: UILayoutPriority = .required) -> NSLayoutConstraint {
+    public class func width(of view: UIView,
+                            theSame relation: Relation = .exactly,
+                            than otherView: UIView,
+                            multipliedBy multiplier: CGFloat = 1.0,
+                            priority: UILayoutPriority = .required) -> NSLayoutConstraint {
         let constraint = NSLayoutConstraint(item: view,
                                             attribute: .width,
                                             relatedBy: relation.layoutRelation,
@@ -123,10 +123,10 @@ public class Constraint: NSObject {
         return constraint
     }
 
-    class func width(_ size: CGFloat,
-                     _ relation: Relation = .exactly,
-                     for view: UIView,
-                     priority: UILayoutPriority = .required) -> NSLayoutConstraint {
+    public class func width(_ size: CGFloat,
+                            _ relation: Relation = .exactly,
+                            for view: UIView,
+                            priority: UILayoutPriority = .required) -> NSLayoutConstraint {
         clean(views: [view])
         let constraint = NSLayoutConstraint(item: view,
                                             attribute: .width,
@@ -141,12 +141,12 @@ public class Constraint: NSObject {
         return constraint
     }
 
-    class func width(of view: UIView,
-                     relatedTo otherView: UIView,
-                     multiplied multiplier: CGFloat = 1.0,
-                     priority: UILayoutPriority = .required,
-                     adjusted adjustment: CGFloat = 0.0,
-                     _ relation: Relation = .exactly) -> NSLayoutConstraint {
+    public class func width(of view: UIView,
+                            relatedTo otherView: UIView,
+                            multiplied multiplier: CGFloat = 1.0,
+                            priority: UILayoutPriority = .required,
+                            adjusted adjustment: CGFloat = 0.0,
+                            _ relation: Relation = .exactly) -> NSLayoutConstraint {
         let parentView = otherView
         let childView = view
 
@@ -162,12 +162,12 @@ public class Constraint: NSObject {
         return width
     }
 
-    class func height(of view: UIView,
-                      relatedTo otherView: UIView,
-                      multiplied multiplier: CGFloat = 1.0,
-                      priority: UILayoutPriority = .required,
-                      adjusted adjustment: CGFloat = 0.0,
-                      _ relation: Relation = .exactly) -> NSLayoutConstraint {
+    public class func height(of view: UIView,
+                             relatedTo otherView: UIView,
+                             multiplied multiplier: CGFloat = 1.0,
+                             priority: UILayoutPriority = .required,
+                             adjusted adjustment: CGFloat = 0.0,
+                             _ relation: Relation = .exactly) -> NSLayoutConstraint {
         clean(views: [view, otherView])
         let height = NSLayoutConstraint(item: view,
                                         attribute: .height,
@@ -304,12 +304,12 @@ public class Constraint: NSObject {
                 topConstraint = view.topAnchor.constraint(equalTo: margins.topAnchor, constant: topOffset)
             case .bottom, .horizontal, .left, .none, .right:
                 topConstraint = NSLayoutConstraint(item: view,
-                                                       attribute: .top,
-                                                       relatedBy: topRelation.layoutRelation,
-                                                       toItem: containingView,
-                                                       attribute: .top,
-                                                       multiplier: 1,
-                                                       constant: topOffset)
+                                                   attribute: .top,
+                                                   relatedBy: topRelation.layoutRelation,
+                                                   toItem: containingView,
+                                                   attribute: .top,
+                                                   multiplier: 1,
+                                                   constant: topOffset)
             }
             topConstraint.priority = topPriority
             constraints.append(topConstraint)
@@ -363,10 +363,10 @@ public class Constraint: NSObject {
 
     @discardableResult
     public class func space(_ views: UIView...,
-                            inDirection direction: LayoutDirection,
-                            distance: CGFloat = 0,
-                            _ relation: Relation = .exactly,
-                            priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
+        inDirection direction: LayoutDirection,
+        distance: CGFloat = 0,
+        _ relation: Relation = .exactly,
+        priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
         clean(views: views)
         let firstViewAttribute: NSLayoutAttribute = direction == .horizontally ? .right : .bottom
         let secondViewAttribute: NSLayoutAttribute = direction == .horizontally ? .left : .top

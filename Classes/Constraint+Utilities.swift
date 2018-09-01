@@ -83,7 +83,7 @@ extension Constraint {
         return views
     }
 
-    static func determineSharedSuperview(between oneView: UIView, and anotherView: UIView) throws -> UIView {
+    public static func determineSharedSuperview(between oneView: UIView, and anotherView: UIView) throws -> UIView {
         let oneViewStack = viewHierarchy(for: oneView)
         let anotherViewStack = viewHierarchy(for: anotherView)
         let sharedViews = oneViewStack.filter(anotherViewStack.contains)

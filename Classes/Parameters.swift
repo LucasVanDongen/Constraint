@@ -63,7 +63,7 @@ extension OffsetablePrimitive where Self: Offsetable {
 }
 
 extension Offsetable {
-    var layoutGuideRespecting: Offset {
+    public var layoutGuideRespecting: Offset {
         return Offset(offset, relation, respectingLayoutGuide: true, priority: priority)
     }
 }
@@ -86,10 +86,10 @@ public struct Offset: Offsetable {
     public let respectingLayoutGuide: Bool
     public let priority: UILayoutPriority
 
-    init(_ offset: CGFloat,
-         _ relation: Relation = .exactly,
-         respectingLayoutGuide: Bool = false,
-         priority: UILayoutPriority = .required) {
+    public init(_ offset: CGFloat,
+                _ relation: Relation = .exactly,
+                respectingLayoutGuide: Bool = false,
+                priority: UILayoutPriority = .required) {
         self.offset = offset
         self.relation = relation
         self.respectingLayoutGuide = respectingLayoutGuide

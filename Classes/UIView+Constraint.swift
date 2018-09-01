@@ -112,7 +112,7 @@ extension UIView {
     public func align(axis: CenterAxis,
                       to viewToAlignWith: UIView,
                       adjustment: CGFloat = 0.0) -> UIView {
-        guard let superview = Constraint.determineSuperview(for: self, and: viewToAlignWith) else {
+        guard let superview = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignWith) else {
             assertionFailure("These views should share a common superview")
             return self
         }
@@ -188,7 +188,7 @@ extension UIView {
     public func height(relatedTo otherView: UIView,
                        multiplied multiplier: CGFloat = 1.0,
                        adjusted adjustment: CGFloat) -> UIView {
-        guard let viewToAddTo = try? Constraint.determineSharedNode(between: self, and: otherView) else {
+        guard let viewToAddTo = try? Constraint.determineSharedSuperview(between: self, and: otherView) else {
             assertionFailure("They should share a node")
             return self
         }
@@ -204,7 +204,7 @@ extension UIView {
     public func width(relatedTo otherView: UIView,
                       multiplied multiplier: CGFloat = 1.0,
                       adjusted adjustment: CGFloat = 0.0) -> UIView {
-        guard let viewToAddTo = try? Constraint.determineSharedNode(between: self, and: otherView) else {
+        guard let viewToAddTo = try? Constraint.determineSharedSuperview(between: self, and: otherView) else {
             assertionFailure("Either one of them should be the parent")
             return self
         }

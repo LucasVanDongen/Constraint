@@ -129,14 +129,15 @@ public class Constraint: NSObject {
                      relatedTo otherView: UIView,
                      multiplied multiplier: CGFloat = 1.0,
                      priority: UILayoutPriority = .required,
-                     adjusted adjustment: CGFloat = 0.0) -> NSLayoutConstraint {
+                     adjusted adjustment: CGFloat = 0.0,
+                     _ relation: Relation = .exactly) -> NSLayoutConstraint {
         let parentView = otherView
         let childView = view
 
         clean(views: [view, otherView])
         let width = NSLayoutConstraint(item: childView,
                                        attribute: .width,
-                                       relatedBy: .equal,
+                                       relatedBy: relation.layoutRelation,
                                        toItem: parentView,
                                        attribute: .width,
                                        multiplier: multiplier,
@@ -149,11 +150,12 @@ public class Constraint: NSObject {
                       relatedTo otherView: UIView,
                       multiplied multiplier: CGFloat = 1.0,
                       priority: UILayoutPriority = .required,
-                      adjusted adjustment: CGFloat = 0.0) -> NSLayoutConstraint {
+                      adjusted adjustment: CGFloat = 0.0,
+                      _ relation: Relation = .exactly) -> NSLayoutConstraint {
         clean(views: [view, otherView])
         let height = NSLayoutConstraint(item: view,
                                         attribute: .height,
-                                        relatedBy: .equal,
+                                        relatedBy: relation.layoutRelation,
                                         toItem: otherView,
                                         attribute: .height,
                                         multiplier: multiplier,

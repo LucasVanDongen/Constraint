@@ -19,11 +19,72 @@ public enum LayoutGuide {
     case all
 }
 
-public struct Offset {
-    let offset: CGFloat
-    let relation: Relation
-    let respectingLayoutGuide: Bool
-    let priority: UILayoutPriority
+public protocol Offsetable {
+    var offset: CGFloat { get }
+    var relation: Relation { get }
+    var respectingLayoutGuide: Bool { get }
+    var priority: UILayoutPriority { get }
+}
+
+public protocol OffsetablePrimitive {
+    var relation: Relation { get }
+    var respectingLayoutGuide: Bool { get }
+    var priority: UILayoutPriority { get }
+}
+
+extension OffsetablePrimitive {
+    public var relation: Relation {
+        return .exactly
+    }
+
+    public var respectingLayoutGuide: Bool {
+        return false
+    }
+
+    public var priority: UILayoutPriority {
+        return .required
+    }
+}
+
+extension OffsetablePrimitive where Self: Offsetable {
+    public var orMore: Offset {
+        return Offset(offset,
+                      .orMore,
+                      respectingLayoutGuide: respectingLayoutGuide,
+                      priority: priority)
+    }
+
+    public var orLess: Offset {
+        return Offset(offset,
+                      .orLess,
+                      respectingLayoutGuide: respectingLayoutGuide,
+                      priority: priority)
+    }
+}
+
+extension Offsetable {
+    var layoutGuideRespecting: Offset {
+        return Offset(offset, relation, respectingLayoutGuide: true, priority: priority)
+    }
+}
+
+extension CGFloat: Offsetable, OffsetablePrimitive {
+    public var offset: CGFloat {
+        return self
+    }
+}
+
+extension Int: Offsetable, OffsetablePrimitive {
+    public var offset: CGFloat {
+        return CGFloat(self)
+    }
+}
+
+public struct Offset: Offsetable {
+    public let offset: CGFloat
+    public let relation: Relation
+    public let respectingLayoutGuide: Bool
+    public let priority: UILayoutPriority
 
     init(_ offset: CGFloat,
          _ relation: Relation = .exactly,

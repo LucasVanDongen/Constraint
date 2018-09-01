@@ -192,15 +192,18 @@ extension UIView {
     @discardableResult
     public func height(relatedTo otherView: UIView,
                        multiplied multiplier: CGFloat = 1.0,
-                       adjusted adjustment: CGFloat) -> UIView {
+                       adjusted adjustment: CGFloat = 0.0,
+                       _ relation: Relation = .exactly) -> UIView {
         guard let viewToAddTo = try? Constraint.determineSharedSuperview(between: self, and: otherView) else {
             assertionFailure("They should share a node")
             return self
         }
 
-        //let viewToAddTo = parentChild.parentView.superview.map { return $0 } ?? parentChild.parentView
-
-        viewToAddTo.addConstraint(Constraint.height(of: self, relatedTo: otherView, multiplied: multiplier, adjusted: adjustment))
+        viewToAddTo.addConstraint(Constraint.height(of: self,
+                                                    relatedTo: otherView,
+                                                    multiplied: multiplier,
+                                                    adjusted: adjustment,
+                                                    relation))
 
         return self
     }
@@ -208,15 +211,18 @@ extension UIView {
     @discardableResult
     public func width(relatedTo otherView: UIView,
                       multiplied multiplier: CGFloat = 1.0,
-                      adjusted adjustment: CGFloat = 0.0) -> UIView {
+                      adjusted adjustment: CGFloat = 0.0,
+                      _ relation: Relation = .exactly) -> UIView {
         guard let viewToAddTo = try? Constraint.determineSharedSuperview(between: self, and: otherView) else {
             assertionFailure("Either one of them should be the parent")
             return self
         }
 
-        //let viewToAddTo = parentChild.parentView.superview.map { return $0 } ?? parentChild.parentView
-
-        viewToAddTo.addConstraint(Constraint.width(of: self, relatedTo: otherView, multiplied: multiplier, adjusted: adjustment))
+        viewToAddTo.addConstraint(Constraint.width(of: self,
+                                                   relatedTo: otherView,
+                                                   multiplied: multiplier,
+                                                   adjusted: adjustment,
+                                                   relation))
 
         return self
     }

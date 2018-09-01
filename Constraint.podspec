@@ -29,7 +29,7 @@ Constraint is a simple Swift wrapper for iOS Auto Layout that has a very natural
   s.swift_version = '4.0'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'Classes/**/*.swift'
   

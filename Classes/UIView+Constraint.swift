@@ -169,10 +169,15 @@ extension UIView {
     public func align(_ side: Side,
                       _ distance: CGFloat = 0,
                       to viewToAlignTo: UIView) -> UIView {
-        guard let superview = self.superview,
-            viewToAlignTo.superview != nil else {
-                assertionFailure("No superview means nothing to attach the constraint to")
-                return self
+        guard let constraintParent = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignTo) else {
+            assertionFailure("Should have a common parent")
+            return self
+        }
+
+        constraintParent.addConstraint(Constraint.align(self, side, distance, to: viewToAlignTo))
+        return self
+    }
+
     @discardableResult
     public func align(_ sides: [Side],
                       _ distance: CGFloat = 0,

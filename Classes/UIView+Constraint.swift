@@ -253,7 +253,9 @@ extension UIView {
     }
 
     @discardableResult
-    public func width(_ width: CGFloat, _ relation: Relation = .exactly, priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+    public func width(_ width: CGFloat,
+                      _ relation: Relation = .exactly,
+                      priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
         addConstraints([
             Constraint.width(width, relation, for: self, priority: priority)
             ])

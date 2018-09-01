@@ -24,10 +24,10 @@ extension UIView {
 
     @discardableResult
     public func attach(inside containingView: UIView? = nil,
-                       top: Offset? = nil,
-                       left: Offset? = nil,
-                       bottom: Offset? = nil,
-                       right: Offset? = nil) -> UIView {
+                       top: Offsetable? = nil,
+                       left: Offsetable? = nil,
+                       bottom: Offsetable? = nil,
+                       right: Offsetable? = nil) -> UIView {
         guard top != nil || left != nil || bottom != nil || right != nil else {
             assertionFailure("At least one Offset should be specified")
             return self

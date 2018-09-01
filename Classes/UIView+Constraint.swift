@@ -11,8 +11,13 @@ import UIKit
 extension UIView {
 
     @discardableResult
-    public func snap(inside parentView: UIView,
+    public func snap(inside parentView: UIView? = nil,
                      offset: CGFloat = 0) -> UIView {
+        guard let parentView = parentView ?? superview else {
+            assertionFailure("This view should either be added to a superview or have a parentView specified")
+            return self
+        }
+
         Constraint.snap(self, inside: parentView, offset: offset)
         return self
     }

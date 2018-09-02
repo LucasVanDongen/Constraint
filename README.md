@@ -1,7 +1,7 @@
 # Constraint
 Constraint is a simple wrapper for iOS Auto Layout that has a very natural syntax
 
-[![CI Status](https://img.shields.io/travis/lucasvandongen/Constraint.svg?style=flat)](https://travis-ci.org/lucasvandongen/Constraint)
+[![CI Status](https://img.shields.io/travis/lucasvandongen/Constraint.svg?style=flat)](https://travis-ci.org/LucasVanDongen/Constraint)
 [![Version](https://img.shields.io/cocoapods/v/Constraint.svg?style=flat)](https://cocoapods.org/pods/Constraint)
 [![License](https://img.shields.io/cocoapods/l/Constraint.svg?style=flat)](https://cocoapods.org/pods/Constraint)
 [![Platform](https://img.shields.io/cocoapods/p/Constraint.svg?style=flat)](https://cocoapods.org/pods/Constraint)

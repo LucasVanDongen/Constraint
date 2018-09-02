@@ -195,14 +195,11 @@ public class Constraint {
                                   constant: 0)
     }
 
+    @available(*, deprecated, renamed: "attach", message: "Replaced by attach")
     public class func snap(_ view: UIView,
                            inside containingView: UIView,
                            offset: CGFloat = 0) {
-        attach(view, inside: containingView,
-               topOffset: offset,
-               leftOffset: offset,
-               bottomOffset: offset,
-               rightOffset: offset)
+        attach(view, inside: containingView, offset: offset)
     }
 
     @discardableResult
@@ -278,6 +275,7 @@ public class Constraint {
         return constraints
     }
 
+    @available(*, deprecated, renamed: "attach(view:inside:top:left:bottom:right:)", message: "Replaced by the attach func that takes Offsettable as a parameter")
     public class func attach(_ view: UIView,
                              inside containingView: UIView,
                              topOffset: CGFloat? = nil,

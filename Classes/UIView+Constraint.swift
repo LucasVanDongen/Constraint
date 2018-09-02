@@ -11,6 +11,7 @@ import UIKit
 extension UIView {
 
     @discardableResult
+    @available(*, deprecated, renamed: "attach()", message: "Replaced by a simpler version of the function attach that does not ask for the parentView anymore")
     public func snap(inside parentView: UIView? = nil,
                      offset: CGFloat = 0) -> UIView {
         guard let parentView = parentView ?? superview else {
@@ -23,7 +24,9 @@ extension UIView {
     }
 
     @discardableResult
-    public func attach(inside containingView: UIView? = nil,
+    @discardableResult
+    @available(*, deprecated, renamed: "attach()", message: "Replaced by a simpler version of the function attach that does not ask for the containingView anymore")
+    public func attach(inside containingView: UIView,
                        top: Offsetable? = nil,
                        left: Offsetable? = nil,
                        bottom: Offsetable? = nil,
@@ -56,6 +59,7 @@ extension UIView {
     }
 
     @discardableResult
+    @available(*, deprecated, renamed: "attach(top:left:bottom:right:)", message: "Replaced by a simpler version of the function attach that does not ask for the parentView anymore")
     public func attach(inside containingView: UIView? = nil,
                        topOffset: CGFloat? = nil,
                        _ topRelation: Relation = .exactly,
@@ -94,6 +98,7 @@ extension UIView {
     }
 
     @discardableResult
+    @available(*, deprecated, renamed: "center(axis:adjusted:priority:)", message: "Replaced by a simpler version of the function center that does not ask for the viewToCenterIn anymore")
     public func center(in viewToCenterIn: UIView? = nil,
                        axis: CenterAxis = .both,
                        adjusted: CGFloat = 0.0,

@@ -260,6 +260,15 @@ extension UIView {
     }
 
     @discardableResult
+    public func ratio(_ ratio: CGSize,
+                      _ relation: Relation = .exactly,
+                      priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+        addConstraint(Constraint.ratio(of: self, width: ratio.width, relatedToHeight: ratio.height))
+
+        return self
+    }
+
+    @discardableResult
     public func ratio(of width: CGFloat,
                       to height: CGFloat = 1,
                       _ relation: Relation = .exactly,

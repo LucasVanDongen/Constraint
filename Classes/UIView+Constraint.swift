@@ -129,6 +129,20 @@ extension UIView {
     }
 
     @discardableResult
+    public func center(axis: CenterAxis = .both,
+                       adjusted: CGFloat = 0.0,
+                       priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+        guard let superview = superview else {
+            assertionFailure("You should either specify the containing view or have a superview set")
+            return self
+        }
+
+        Constraint.center(self, in: superview, axis: axis, adjusted: adjusted, priority: priority)
+
+        return self
+    }
+
+    @discardableResult
     public func align(axis: CenterAxis,
                       to viewToAlignWith: UIView,
                       adjustment: CGFloat = 0.0) -> UIView {

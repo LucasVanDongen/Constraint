@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Constraint'
-  s.version          = '0.1.6'
+  s.version          = '0.1.7'
   s.summary          = 'Constraint is a simple Swift wrapper for iOS Auto Layout that has a very natural syntax.'
 
 # This description is used to generate tags and improve search results.
@@ -29,7 +29,6 @@ Constraint is a simple Swift wrapper for iOS Auto Layout that has a very natural
   s.swift_version = '4.0'
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  #s.ios.deployment_target = '11.0'
   s.platform = :ios, '11.0'
 
   s.source_files = 'Classes/**/*.swift'

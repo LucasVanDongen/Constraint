@@ -41,6 +41,16 @@ extension UIView {
                        left: Offsetable? = nil,
                        bottom: Offsetable? = nil,
                        right: Offsetable? = nil) -> UIView {
+        Constraint.attach(self,
+                          inside: containingView,
+                          top: top,
+                          left: left,
+                          bottom: bottom,
+                          right: right)
+
+        return self
+    }
+
     @discardableResult
     public func attach(sides: Set<Side>,
                        _ offset: CGFloat = 0,
@@ -69,25 +79,24 @@ extension UIView {
 
         return attach(top: top, left: left, bottom: bottom, right: right)
     }
+
+    @discardableResult
+    public func attach(top: Offsetable? = nil,
+                       left: Offsetable? = nil,
+                       bottom: Offsetable? = nil,
+                       right: Offsetable? = nil) -> UIView {
         guard top != nil || left != nil || bottom != nil || right != nil else {
             assertionFailure("At least one Offset should be specified")
             return self
         }
 
-        let viewToAttachInto: UIView
-        if let containingView = containingView {
-            viewToAttachInto = containingView
-        } else {
-            guard let superview = superview else {
-                assertionFailure("You should either specify the containing view or have a superview set")
-                return self
-            }
-
-            viewToAttachInto = superview
+        guard let superview = superview else {
+            assertionFailure("This view should already have a superview")
+            return self
         }
 
-        Constraint.attach(view: self,
-                          inside: viewToAttachInto,
+        Constraint.attach(self,
+                          inside: superview,
                           top: top,
                           left: left,
                           bottom: bottom,

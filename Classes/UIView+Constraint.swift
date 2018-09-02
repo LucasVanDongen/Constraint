@@ -24,6 +24,16 @@ extension UIView {
     }
 
     @discardableResult
+    public func attach(offset: CGFloat = 0) -> UIView {
+        guard let superview = superview else {
+            assertionFailure("This view should already have a superview")
+            return self
+        }
+
+        Constraint.attach(self, inside: superview, offset: offset)
+        return self
+    }
+
     @discardableResult
     @available(*, deprecated, renamed: "attach()", message: "Replaced by a simpler version of the function attach that does not ask for the containingView anymore")
     public func attach(inside containingView: UIView,

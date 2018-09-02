@@ -41,6 +41,34 @@ extension UIView {
                        left: Offsetable? = nil,
                        bottom: Offsetable? = nil,
                        right: Offsetable? = nil) -> UIView {
+    @discardableResult
+    public func attach(sides: Set<Side>,
+                       _ offset: CGFloat = 0,
+                       respectingLayoutGuide: Bool = false) -> UIView {
+        var top: Offset? = nil
+        var left: Offset? = nil
+        var right: Offset? = nil
+        var bottom: Offset? = nil
+
+        func defaultOffset(with offset: CGFloat) -> Offset {
+            return Offset(offset, .exactly, respectingLayoutGuide: respectingLayoutGuide)
+        }
+
+        sides.map { side in
+            switch side {
+            case .top:
+                top = defaultOffset(with: offset)
+            case .left:
+                left = defaultOffset(with: offset)
+            case .bottom:
+                bottom = defaultOffset(with: offset)
+            case .right:
+                right = defaultOffset(with: offset)
+            }
+        }
+
+        return attach(top: top, left: left, bottom: bottom, right: right)
+    }
         guard top != nil || left != nil || bottom != nil || right != nil else {
             assertionFailure("At least one Offset should be specified")
             return self
@@ -208,7 +236,7 @@ extension UIView {
     }
 
     @discardableResult
-    public func align(_ sides: [Side],
+    public func align(_ sides: Set<Side>,
                       _ distance: CGFloat = 0,
                       to viewToAlignTo: UIView) -> UIView {
         guard let constraintParent = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignTo) else {

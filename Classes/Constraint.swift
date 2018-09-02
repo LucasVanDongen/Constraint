@@ -42,7 +42,7 @@ public class Constraint {
     }
 
     public class func align(_ viewToAlign: UIView,
-                            _ sides: [Side],
+                            _ sides: Set<Side>,
                             _ distance: CGFloat = 0,
                             relation: NSLayoutRelation = .equal,
                             to viewToAlignTo: UIView) -> [NSLayoutConstraint] {

@@ -182,7 +182,8 @@ extension UIView {
     @discardableResult
     public func align(axis: CenterAxis,
                       to viewToAlignWith: UIView,
-                      adjustment: CGFloat = 0.0) -> UIView {
+                      adjusted adjustment: CGFloat = 0.0,
+                      priority: UILayoutPriority = .required) -> UIView {
         guard let superview = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignWith) else {
             assertionFailure("These views should share a common superview")
             return self
@@ -191,7 +192,8 @@ extension UIView {
         let constraints = Constraint.align(self,
                                            axis,
                                            to: viewToAlignWith,
-                                           adjustment: adjustment)
+                                           adjusted: adjustment,
+                                           priority: priority)
 
         superview.addConstraints(constraints)
 

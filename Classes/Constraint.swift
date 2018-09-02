@@ -14,16 +14,19 @@ public class Constraint {
     public class func align(_ viewToAlign: UIView,
                             _ axis: CenterAxis,
                             to viewToAlignTo: UIView,
-                            adjustment: CGFloat = 0.0) -> [NSLayoutConstraint] {
+                            adjusted adjustment: CGFloat = 0.0,
+                            priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
 
         return axis.attributes.map { attribute in
-            return NSLayoutConstraint(item: viewToAlign,
-                                      attribute: attribute,
-                                      relatedBy: .equal,
-                                      toItem: viewToAlignTo,
-                                      attribute: attribute,
-                                      multiplier: 1.0,
-                                      constant: adjustment)
+            let constraint = NSLayoutConstraint(item: viewToAlign,
+                                                attribute: attribute,
+                                                relatedBy: .equal,
+                                                toItem: viewToAlignTo,
+                                                attribute: attribute,
+                                                multiplier: 1.0,
+                                                constant: adjustment)
+            constraint.priority = priority
+            return constraint
         }
     }
 

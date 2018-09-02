@@ -64,7 +64,7 @@ extension UIView {
             return Offset(offset, .exactly, respectingLayoutGuide: respectingLayoutGuide)
         }
 
-        sides.map { side in
+        sides.forEach { side in
             switch side {
             case .top:
                 top = defaultOffset(with: offset)

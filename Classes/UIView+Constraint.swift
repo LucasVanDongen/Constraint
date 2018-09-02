@@ -106,45 +106,6 @@ extension UIView {
     }
 
     @discardableResult
-    @available(*, deprecated, renamed: "attach(top:left:bottom:right:)", message: "Replaced by a simpler version of the function attach that does not ask for the parentView anymore")
-    public func attach(inside containingView: UIView? = nil,
-                       topOffset: CGFloat? = nil,
-                       _ topRelation: Relation = .exactly,
-                       withTopPriority topPriority: UILayoutPriority = .required,
-                       leftOffset: CGFloat? = nil,
-                       _ leftRelation: Relation = .exactly,
-                       withLeftPriority leftPriority: UILayoutPriority = .required,
-                       bottomOffset: CGFloat? = nil,
-                       _ bottomRelation: Relation = .exactly,
-                       withBottomPriority bottomPriority: UILayoutPriority = .required,
-                       rightOffset: CGFloat? = nil,
-                       _ rightRelation: Relation = .exactly,
-                       withRightPriority rightPriority: UILayoutPriority = .required,
-                       respecting layoutGuides: LayoutGuide = .none) -> UIView {
-        let viewToAttachInto: UIView
-        if let containingView = containingView {
-            viewToAttachInto = containingView
-        } else {
-            guard let superview = superview else {
-                assertionFailure("You should either specify the containing view or have a superview set")
-                return self
-            }
-
-            viewToAttachInto = superview
-        }
-
-        Constraint.attach(self,
-                          inside: viewToAttachInto,
-                          topOffset: topOffset, topRelation, withTopPriority: topPriority,
-                          leftOffset: leftOffset, leftRelation, withLeftPriority: leftPriority,
-                          bottomOffset: bottomOffset, bottomRelation, withBottomPriority: bottomPriority,
-                          rightOffset: rightOffset, rightRelation, withRightPriority: rightPriority,
-                          respecting: layoutGuides)
-
-        return self
-    }
-
-    @discardableResult
     @available(*, deprecated, renamed: "center(axis:adjusted:priority:)", message: "Replaced by a simpler version of the function center that does not ask for the viewToCenterIn anymore")
     public func center(in viewToCenterIn: UIView? = nil,
                        axis: CenterAxis = .both,
@@ -368,9 +329,9 @@ extension UIView {
                                           using spacer: UIView) -> NSLayoutConstraint {
         switch side {
         case .bottom, .top:
-            attach(inside: view, leftOffset: 0, rightOffset: 0)
+            attach(left: 0, right: 0)
         case .left, .right:
-            attach(inside: view, topOffset: 0, bottomOffset: 0)
+            attach(top: 0, bottom: 0)
         }
 
         space(0, side.spaceDirection, spacer, priority: UILayoutPriority(700))

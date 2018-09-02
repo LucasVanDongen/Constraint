@@ -211,10 +211,10 @@ public class Constraint {
                            offset: CGFloat = 0) -> [NSLayoutConstraint] {
         return attach(view,
                       inside: containingView,
-                      topOffset: offset,
-                      leftOffset: offset,
-                      bottomOffset: offset,
-                      rightOffset: offset)
+                      top: offset,
+                      left: offset,
+                      bottom: offset,
+                      right: offset)
     }
 
     @discardableResult
@@ -283,91 +283,6 @@ public class Constraint {
                                                      multiplier: 1,
                                                      constant: -right.offset)
             rightConstraint.priority = right.priority
-            constraints.append(rightConstraint)
-        }
-
-        NSLayoutConstraint.activate(constraints)
-        return constraints
-    }
-
-    @available(*, deprecated, renamed: "attach(view:inside:top:left:bottom:right:)", message: "Replaced by the attach func that takes Offsettable as a parameter")
-    public class func attach(_ view: UIView,
-                             inside containingView: UIView,
-                             topOffset: CGFloat? = nil,
-                             _ topRelation: Relation = .exactly,
-                             withTopPriority topPriority: UILayoutPriority = .required,
-                             leftOffset: CGFloat? = nil,
-                             _ leftRelation: Relation = .exactly,
-                             withLeftPriority leftPriority: UILayoutPriority = .required,
-                             bottomOffset: CGFloat? = nil,
-                             _ bottomRelation: Relation = .exactly,
-                             withBottomPriority bottomPriority: UILayoutPriority = .required,
-                             rightOffset: CGFloat? = nil,
-                             _ rightRelation: Relation = .exactly,
-                             withRightPriority rightPriority: UILayoutPriority = .required,
-                             respecting layoutGuides: LayoutGuide = .none) -> [NSLayoutConstraint] {
-        clean(views: [view, containingView])
-        var constraints = [NSLayoutConstraint]()
-
-        if let topOffset = topOffset {
-            let topConstraint: NSLayoutConstraint
-            switch layoutGuides {
-            case .all, .top, .vertical:
-                let margins = containingView.layoutMarginsGuide
-                topConstraint = view.topAnchor.constraint(equalTo: margins.topAnchor, constant: topOffset)
-            case .bottom, .horizontal, .left, .none, .right:
-                topConstraint = NSLayoutConstraint(item: view,
-                                                   attribute: .top,
-                                                   relatedBy: topRelation.layoutRelation,
-                                                   toItem: containingView,
-                                                   attribute: .top,
-                                                   multiplier: 1,
-                                                   constant: topOffset)
-            }
-            topConstraint.priority = topPriority
-            constraints.append(topConstraint)
-        }
-
-        if let leftOffset = leftOffset {
-            let leftConstraint = NSLayoutConstraint(item: view,
-                                                    attribute: .left,
-                                                    relatedBy: leftRelation.layoutRelation,
-                                                    toItem: containingView,
-                                                    attribute: .left,
-                                                    multiplier: 1,
-                                                    constant: leftOffset)
-            leftConstraint.priority = leftPriority
-            constraints.append(leftConstraint)
-        }
-
-        if let bottomOffset = bottomOffset {
-            let bottomConstraint: NSLayoutConstraint
-            switch layoutGuides {
-            case .all, .bottom, .vertical:
-                let margins = containingView.layoutMarginsGuide
-                bottomConstraint = view.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -bottomOffset)
-            case .top, .horizontal, .left, .none, .right:
-                bottomConstraint = NSLayoutConstraint(item: view,
-                                                      attribute: .bottom,
-                                                      relatedBy: bottomRelation.layoutRelation,
-                                                      toItem: containingView,
-                                                      attribute: .bottom,
-                                                      multiplier: 1,
-                                                      constant: -bottomOffset)
-            }
-            bottomConstraint.priority = bottomPriority
-            constraints.append(bottomConstraint)
-        }
-
-        if let rightOffset = rightOffset {
-            let rightConstraint = NSLayoutConstraint(item: view,
-                                                     attribute: .right,
-                                                     relatedBy: rightRelation.layoutRelation,
-                                                     toItem: containingView,
-                                                     attribute: .right,
-                                                     multiplier: 1,
-                                                     constant: -rightOffset)
-            rightConstraint.priority = rightPriority
             constraints.append(rightConstraint)
         }
 

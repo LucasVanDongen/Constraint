@@ -203,7 +203,19 @@ public class Constraint {
     }
 
     @discardableResult
-    public class func attach(view: UIView,
+    public class func attach(_ view: UIView,
+                           inside containingView: UIView,
+                           offset: CGFloat = 0) -> [NSLayoutConstraint] {
+        return attach(view,
+                      inside: containingView,
+                      topOffset: offset,
+                      leftOffset: offset,
+                      bottomOffset: offset,
+                      rightOffset: offset)
+    }
+
+    @discardableResult
+    public class func attach(_ view: UIView,
                              inside containingView: UIView,
                              top: Offsetable? = nil,
                              left: Offsetable? = nil,
@@ -290,7 +302,7 @@ public class Constraint {
                              rightOffset: CGFloat? = nil,
                              _ rightRelation: Relation = .exactly,
                              withRightPriority rightPriority: UILayoutPriority = .required,
-                             respecting layoutGuides: LayoutGuide = .none) {
+                             respecting layoutGuides: LayoutGuide = .none) -> [NSLayoutConstraint] {
         clean(views: [view, containingView])
         var constraints = [NSLayoutConstraint]()
 
@@ -357,6 +369,7 @@ public class Constraint {
         }
 
         NSLayoutConstraint.activate(constraints)
+        return constraints
     }
 
     @discardableResult

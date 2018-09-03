@@ -47,18 +47,11 @@ extension OffsetablePrimitive {
 }
 
 extension OffsetablePrimitive where Self: Offsetable {
-    public var orMore: Offset {
-        return Offset(offset,
-                      .orMore,
-                      respectingLayoutGuide: respectingLayoutGuide,
-                      priority: priority)
-    }
+}
 
-    public var orLess: Offset {
-        return Offset(offset,
-                      .orLess,
-                      respectingLayoutGuide: respectingLayoutGuide,
-                      priority: priority)
+extension Offsetable {
+    public var layoutGuideRespecting: Offset {
+        return Offset(offset, relation, respectingLayoutGuide: true, priority: priority)
     }
 
     public var defaultLowPrioritized: Offset {
@@ -74,18 +67,25 @@ extension OffsetablePrimitive where Self: Offsetable {
                       respectingLayoutGuide: respectingLayoutGuide,
                       priority: UILayoutPriority.defaultHigh)
     }
+    public var orMore: Offset {
+        return Offset(offset,
+                      .orMore,
+                      respectingLayoutGuide: respectingLayoutGuide,
+                      priority: priority)
+    }
+
+    public var orLess: Offset {
+        return Offset(offset,
+                      .orLess,
+                      respectingLayoutGuide: respectingLayoutGuide,
+                      priority: priority)
+    }
 
     public func prioritized(to priority: UILayoutPriority) -> Offset {
         return Offset(offset,
                       relation,
                       respectingLayoutGuide: respectingLayoutGuide,
                       priority: priority)
-    }
-}
-
-extension Offsetable {
-    public var layoutGuideRespecting: Offset {
-        return Offset(offset, relation, respectingLayoutGuide: true, priority: priority)
     }
 }
 

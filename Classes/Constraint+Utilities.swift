@@ -93,7 +93,7 @@ extension Constraint {
 
         return firstSharedView
     }
-
+/*
     class func anchorConstraint(of view: UIView,
                                 inside containingView: UIView,
                                 fromThe side: Side,
@@ -162,5 +162,5 @@ extension Constraint {
 
         constraint.priority = priority
         return constraint
-    }
+    }*/
 }

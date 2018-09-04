@@ -39,9 +39,7 @@ Sometimes you need to store the constraints that are generated. In this case you
 ```swift
 private var messageHeight: NSLayoutContraint?
 // ...
-let messageHeight = Constraint.height(50, for: message)
-view.addConstraint(messageHeight)
-self.messageHeight = messageHeight
+messageHeight = Constraint.height(50, for: message).activated
 ```
     
 In this case you will have to add the constraint manually to the view. It's the maximum amount of flexibility but a bit more work.

@@ -54,14 +54,14 @@ extension UIView {
     @discardableResult
     public func attach(sides: Set<Side>,
                        _ offset: CGFloat = 0,
-                       respectingLayoutGuide: Bool = false) -> UIView {
+                       respectingLayoutGuides: Bool = false) -> UIView {
         var top: Offset? = nil
         var left: Offset? = nil
         var right: Offset? = nil
         var bottom: Offset? = nil
 
         func defaultOffset(with offset: CGFloat) -> Offset {
-            return Offset(offset, .exactly, respectingLayoutGuide: respectingLayoutGuide)
+            return Offset(offset, .exactly, respectingLayoutGuide: respectingLayoutGuides)
         }
 
         sides.forEach { side in

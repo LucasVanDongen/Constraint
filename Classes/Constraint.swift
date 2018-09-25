@@ -16,7 +16,7 @@ public class Constraint {
                             to viewToAlignTo: UIView,
                             adjusted adjustment: CGFloat = 0.0,
                             priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
-
+        clean(views: [viewToAlign, viewToAlignTo])
         return axis.attributes.map { attribute in
             let constraint = NSLayoutConstraint(item: viewToAlign,
                                                 attribute: attribute,
@@ -35,6 +35,7 @@ public class Constraint {
                             _ distance: CGFloat = 0,
                             relation: NSLayoutRelation = .equal,
                             to viewToAlignTo: UIView) -> NSLayoutConstraint {
+        clean(views: [viewToAlign, viewToAlignTo])
         return NSLayoutConstraint(item: viewToAlign,
                                   attribute: side.attribute,
                                   relatedBy: relation,
@@ -49,6 +50,7 @@ public class Constraint {
                             _ distance: CGFloat = 0,
                             relation: NSLayoutRelation = .equal,
                             to viewToAlignTo: UIView) -> [NSLayoutConstraint] {
+        clean(views: [viewToAlign, viewToAlignTo])
         return sides.map { side -> NSLayoutConstraint in
             NSLayoutConstraint(item: viewToAlign,
                                attribute: side.attribute,

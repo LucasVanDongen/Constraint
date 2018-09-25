@@ -24,7 +24,7 @@ extension UIView {
     }
 
     @discardableResult
-    public func attach(offset: CGFloat = 0) -> UIView {
+    public func attach(offset: CGFloat = 0, respectingLayoutGuides: Bool = false) -> UIView {
         guard let superview = superview else {
             assertionFailure("This view should already have a superview")
             return self

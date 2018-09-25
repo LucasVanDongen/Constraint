@@ -209,14 +209,15 @@ public class Constraint {
 
     @discardableResult
     public class func attach(_ view: UIView,
-                           inside containingView: UIView,
-                           offset: CGFloat = 0) -> [NSLayoutConstraint] {
+                             inside containingView: UIView,
+                             offset: CGFloat = 0,
+                             respectingLayoutGuides: Bool = false) -> [NSLayoutConstraint] {
         return attach(view,
                       inside: containingView,
-                      top: offset,
-                      left: offset,
-                      bottom: offset,
-                      right: offset)
+                      top: offset.layoutGuideRespecting,
+                      left: offset.layoutGuideRespecting,
+                      bottom: offset.layoutGuideRespecting,
+                      right: offset.layoutGuideRespecting)
     }
 
     @discardableResult

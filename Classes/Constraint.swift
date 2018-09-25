@@ -33,7 +33,7 @@ public class Constraint {
     public class func align(_ viewToAlign: UIView,
                             _ side: Side,
                             _ distance: CGFloat = 0,
-                            relation: NSLayoutRelation = .equal,
+                            relation: NSLayoutConstraint.Relation = .equal,
                             to viewToAlignTo: UIView) -> NSLayoutConstraint {
         clean(views: [viewToAlign, viewToAlignTo])
         return NSLayoutConstraint(item: viewToAlign,
@@ -48,7 +48,7 @@ public class Constraint {
     public class func align(_ viewToAlign: UIView,
                             _ sides: Set<Side>,
                             _ distance: CGFloat = 0,
-                            relation: NSLayoutRelation = .equal,
+                            relation: NSLayoutConstraint.Relation = .equal,
                             to viewToAlignTo: UIView) -> [NSLayoutConstraint] {
         clean(views: [viewToAlign, viewToAlignTo])
         return sides.map { side -> NSLayoutConstraint in
@@ -187,7 +187,7 @@ public class Constraint {
 
     public class func ratio(of view: UIView,
                             width: CGFloat,
-                            _ relation: NSLayoutRelation = .equal,
+                            _ relation: NSLayoutConstraint.Relation = .equal,
                             relatedToHeight height: CGFloat) -> NSLayoutConstraint {
         let multiplier = width / height
         clean(views: [view])
@@ -300,8 +300,8 @@ public class Constraint {
                             _ relation: Relation = .exactly,
                             priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
         clean(views: views)
-        let firstViewAttribute: NSLayoutAttribute = direction == .horizontally ? .right : .bottom
-        let secondViewAttribute: NSLayoutAttribute = direction == .horizontally ? .left : .top
+        let firstViewAttribute: NSLayoutConstraint.Attribute = direction == .horizontally ? .right : .bottom
+        let secondViewAttribute: NSLayoutConstraint.Attribute = direction == .horizontally ? .left : .top
 
         return views.compactMap({ (view: UIView) -> (UIView, Int)? in
             guard let index = views.index(of: view) else {

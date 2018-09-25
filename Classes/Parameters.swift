@@ -124,7 +124,7 @@ public enum SpaceDirection {
     case above
     case leftOf
 
-    var spacedViewAttribute: NSLayoutAttribute {
+    var spacedViewAttribute: NSLayoutConstraint.Attribute {
         switch self {
         case .below: return .top
         case .rightOf: return .left
@@ -133,7 +133,7 @@ public enum SpaceDirection {
         }
     }
 
-    var otherViewAttribute: NSLayoutAttribute {
+    var otherViewAttribute: NSLayoutConstraint.Attribute {
         switch self {
         case .below: return .bottom
         case .rightOf: return .right
@@ -173,7 +173,7 @@ public enum AlignmentType {
     case verticalCenters
     case baselines
 
-    var attribute: NSLayoutAttribute {
+    var attribute: NSLayoutConstraint.Attribute {
         switch self {
         case .leadingEdges: return .leading
         case .trailingEdges: return .trailing
@@ -191,7 +191,7 @@ public enum CenterAxis {
     case y
     case both
 
-    var attributes: [NSLayoutAttribute] {
+    var attributes: [NSLayoutConstraint.Attribute] {
         switch self {
         case .x: return [.centerX]
         case .y: return [.centerY]
@@ -206,7 +206,7 @@ public enum Side {
     case bottom
     case right
 
-    var attributes: (inAttribute: NSLayoutAttribute, outAttribute: NSLayoutAttribute) {
+    var attributes: (inAttribute: NSLayoutConstraint.Attribute, outAttribute: NSLayoutConstraint.Attribute) {
         switch self {
         case .top:
             return (.top, .bottom)
@@ -219,7 +219,7 @@ public enum Side {
         }
     }
 
-    var attribute: NSLayoutAttribute {
+    var attribute: NSLayoutConstraint.Attribute {
         switch self {
         case .top: return .top
         case .left: return .left
@@ -250,7 +250,7 @@ public enum Relation {
     case orLess
     case orMore
 
-    var layoutRelation: NSLayoutRelation {
+    var layoutRelation: NSLayoutConstraint.Relation {
         switch self {
         case .exactly:
             return .equal
@@ -261,7 +261,7 @@ public enum Relation {
         }
     }
 
-    var reversedLayoutRelation: NSLayoutRelation {
+    var reversedLayoutRelation: NSLayoutConstraint.Relation {
         switch self {
         case .exactly:
             return .equal

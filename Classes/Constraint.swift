@@ -295,10 +295,10 @@ public class Constraint {
 
     @discardableResult
     public class func space(_ views: UIView...,
-        inDirection direction: LayoutDirection,
-        distance: CGFloat = 0,
-        _ relation: Relation = .exactly,
-        priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
+                            inDirection direction: LayoutDirection,
+                            distance: CGFloat = 0,
+                            _ relation: Relation = .exactly,
+                            priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
         clean(views: views)
         let firstViewAttribute: NSLayoutAttribute = direction == .horizontally ? .right : .bottom
         let secondViewAttribute: NSLayoutAttribute = direction == .horizontally ? .left : .top

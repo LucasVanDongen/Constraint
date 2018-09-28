@@ -260,18 +260,15 @@ public class Constraint {
 
         if let bottom = bottom {
             let bottomConstraint: NSLayoutConstraint
-            switch bottom.respectingLayoutGuide {
-            case true:
-                let margins = containingView.layoutMarginsGuide
-                bottomConstraint = view.bottomAnchor.constraint(equalTo: margins.bottomAnchor, constant: -bottom.offset)
-            case false:
-                bottomConstraint = NSLayoutConstraint(item: view,
-                                                      attribute: .bottom,
-                                                      relatedBy: bottom.relation.layoutRelation,
-                                                      toItem: containingView,
-                                                      attribute: .bottom,
-                                                      multiplier: 1,
-                                                      constant: -bottom.offset)
+            let margins = bottom.respectingLayoutGuide ? containingView.layoutMarginsGuide.bottomAnchor :
+                containingView.bottomAnchor
+            switch bottom.relation {
+            case .exactly:
+                bottomConstraint = view.bottomAnchor.constraint(equalTo: margins, constant: bottom.offset)
+            case .orLess:
+                bottomConstraint = view.bottomAnchor.constraint(lessThanOrEqualTo: margins, constant: bottom.offset)
+            case .orMore:
+                bottomConstraint = view.bottomAnchor.constraint(greaterThanOrEqualTo: margins, constant: bottom.offset)
             }
             bottomConstraint.priority = bottom.priority
             constraints.append(bottomConstraint)

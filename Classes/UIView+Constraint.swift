@@ -35,7 +35,7 @@ extension UIView {
     }
 
     @discardableResult
-    @available(*, deprecated, renamed: "attach()", message: "Replaced by a simpler version of the function attach that does not ask for the containingView anymore")
+    @available(*, deprecated, renamed: "attach(top:left:bottom:right:)", message: "Replaced by a simpler version of the function attach that does not ask for the containingView anymore")
     public func attach(inside containingView: UIView,
                        top: Offsetable? = nil,
                        left: Offsetable? = nil,
@@ -52,28 +52,48 @@ extension UIView {
     }
 
     @discardableResult
+    @available(*, deprecated, renamed: "attach(sides:_:)", message: "Replaced by a version that uses Offsetable instead")
     public func attach(sides: Set<Side>,
                        _ offset: CGFloat = 0,
                        respectingLayoutGuides: Bool = false) -> UIView {
-        var top: Offset? = nil
-        var left: Offset? = nil
-        var right: Offset? = nil
-        var bottom: Offset? = nil
+        let offsetable: Offsetable = respectingLayoutGuides ? offset.layoutGuideRespecting : offset
+        return attach(sides: sides, offsetable)
+    }
 
-        func defaultOffset(with offset: CGFloat) -> Offset {
-            return Offset(offset, .exactly, respectingLayoutGuide: respectingLayoutGuides)
-        }
+    @discardableResult
+    public func attach(_ offset: CGFloat = 0) -> UIView {
+        return attach(top: offset, left: offset, bottom: offset, right: offset)
+    }
+
+    @discardableResult
+    public func attach(with insets: UIEdgeInsets) -> UIView {
+        return attach(top: insets.top, left: insets.left, bottom: insets.bottom, right: insets.right)
+    }
+
+    @discardableResult
+    public func attach(vertically: Offsetable? = nil,
+                       horizontally: Offsetable? = nil) -> UIView {
+        return attach(top: vertically, left: horizontally, bottom: vertically, right: horizontally)
+    }
+
+    @discardableResult
+    public func attach(sides: Set<Side>,
+                       _ offset: Offsetable = 0) -> UIView {
+        var top: Offsetable? = nil
+        var left: Offsetable? = nil
+        var right: Offsetable? = nil
+        var bottom: Offsetable? = nil
 
         sides.forEach { side in
             switch side {
             case .top:
-                top = defaultOffset(with: offset)
+                top = offset
             case .left:
-                left = defaultOffset(with: offset)
+                left = offset
             case .bottom:
-                bottom = defaultOffset(with: offset)
+                bottom = offset
             case .right:
-                right = defaultOffset(with: offset)
+                right = offset
             }
         }
 
@@ -209,6 +229,22 @@ extension UIView {
 
     @discardableResult
     public func align(_ sides: Set<Side>,
+                      _ distance: CGFloat = 0,
+                      to viewToAlignTo: UIView) -> UIView {
+        guard let constraintParent = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignTo) else {
+            assertionFailure("Should have a common parent")
+            return self
+        }
+
+        for side in sides {
+            constraintParent.addConstraint(Constraint.align(self, side, distance, to: viewToAlignTo))
+        }
+
+        return self
+    }
+
+    @discardableResult
+    public func align(sides: Set<Side>,
                       _ distance: CGFloat = 0,
                       to viewToAlignTo: UIView) -> UIView {
         guard let constraintParent = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignTo) else {

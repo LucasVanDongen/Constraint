@@ -264,11 +264,11 @@ public class Constraint {
                 containingView.bottomAnchor
             switch bottom.relation {
             case .exactly:
-                bottomConstraint = view.bottomAnchor.constraint(equalTo: margins, constant: bottom.offset)
+                bottomConstraint = view.bottomAnchor.constraint(equalTo: margins, constant: -bottom.offset)
             case .orLess:
-                bottomConstraint = view.bottomAnchor.constraint(lessThanOrEqualTo: margins, constant: bottom.offset)
+                bottomConstraint = view.bottomAnchor.constraint(lessThanOrEqualTo: margins, constant: -bottom.offset)
             case .orMore:
-                bottomConstraint = view.bottomAnchor.constraint(greaterThanOrEqualTo: margins, constant: bottom.offset)
+                bottomConstraint = view.bottomAnchor.constraint(greaterThanOrEqualTo: margins, constant: -bottom.offset)
             }
             bottomConstraint.priority = bottom.priority
             constraints.append(bottomConstraint)

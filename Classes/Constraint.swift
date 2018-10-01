@@ -34,31 +34,37 @@ public class Constraint {
                             _ side: Side,
                             _ distance: CGFloat = 0,
                             relation: NSLayoutConstraint.Relation = .equal,
-                            to viewToAlignTo: UIView) -> NSLayoutConstraint {
+                            to viewToAlignTo: UIView,
+                            priority: UILayoutPriority = .required) -> NSLayoutConstraint {
         clean(views: [viewToAlign, viewToAlignTo])
-        return NSLayoutConstraint(item: viewToAlign,
-                                  attribute: side.attribute,
-                                  relatedBy: relation,
-                                  toItem: viewToAlignTo,
-                                  attribute: side.attribute,
-                                  multiplier: 1,
-                                  constant: distance)
+        let constraint = NSLayoutConstraint(item: viewToAlign,
+                                            attribute: side.attribute,
+                                            relatedBy: relation,
+                                            toItem: viewToAlignTo,
+                                            attribute: side.attribute,
+                                            multiplier: 1,
+                                            constant: distance)
+        constraint.priority = priority
+        return constraint
     }
 
     public class func align(_ viewToAlign: UIView,
                             _ sides: Set<Side>,
                             _ distance: CGFloat = 0,
                             relation: NSLayoutConstraint.Relation = .equal,
-                            to viewToAlignTo: UIView) -> [NSLayoutConstraint] {
+                            to viewToAlignTo: UIView,
+                            priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
         clean(views: [viewToAlign, viewToAlignTo])
         return sides.map { side -> NSLayoutConstraint in
-            NSLayoutConstraint(item: viewToAlign,
-                               attribute: side.attribute,
-                               relatedBy: relation,
-                               toItem: viewToAlignTo,
-                               attribute: side.attribute,
-                               multiplier: 1,
-                               constant: distance)
+            let constraint = NSLayoutConstraint(item: viewToAlign,
+                                                attribute: side.attribute,
+                                                relatedBy: relation,
+                                                toItem: viewToAlignTo,
+                                                attribute: side.attribute,
+                                                multiplier: 1,
+                                                constant: distance)
+            constraint.priority = priority
+            return constraint
         }
     }
 
@@ -66,7 +72,7 @@ public class Constraint {
                              in viewToCenterTo: UIView,
                              axis: CenterAxis = .both,
                              adjusted: CGFloat = 0.0,
-                             priority: UILayoutPriority = UILayoutPriority.required) {
+                             priority: UILayoutPriority = .required) {
         clean(views: [viewToCenter, viewToCenterTo])
 
         if axis != .y {
@@ -97,7 +103,7 @@ public class Constraint {
     public class func height(_ size: CGFloat,
                              _ relation: Relation = .exactly,
                              for view: UIView,
-                             priority: UILayoutPriority = UILayoutPriority.required) -> NSLayoutConstraint {
+                             priority: UILayoutPriority = .required) -> NSLayoutConstraint {
         clean(views: [view])
         let constraint = NSLayoutConstraint(item: view,
                                             attribute: .height,

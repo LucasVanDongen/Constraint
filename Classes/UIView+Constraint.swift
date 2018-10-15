@@ -35,18 +35,18 @@ extension UIView {
     }
 
     @discardableResult
-    @available(*, deprecated, renamed: "attach(top:left:bottom:right:)", message: "Replaced by a simpler version of the function attach that does not ask for the containingView anymore")
+    @available(*, deprecated, renamed: "attach()", message: "Replaced by a simpler version of the function attach that does not ask for the containingView anymore")
     public func attach(inside containingView: UIView,
                        top: Offsetable? = nil,
-                       left: Offsetable? = nil,
+                       leading: Offsetable? = nil,
                        bottom: Offsetable? = nil,
-                       right: Offsetable? = nil) -> UIView {
+                       trailing: Offsetable? = nil) -> UIView {
         Constraint.attach(self,
                           inside: containingView,
                           top: top,
-                          left: left,
+                          leading: leading,
                           bottom: bottom,
-                          right: right)
+                          trailing: trailing)
 
         return self
     }
@@ -62,50 +62,51 @@ extension UIView {
 
     @discardableResult
     public func attach(_ offset: CGFloat = 0) -> UIView {
-        return attach(top: offset, left: offset, bottom: offset, right: offset)
+        return attach(top: offset, leading: offset, bottom: offset, trailing: offset)
     }
 
     @discardableResult
     public func attach(with insets: UIEdgeInsets) -> UIView {
-        return attach(top: insets.top, left: insets.left, bottom: insets.bottom, right: insets.right)
+        return attach(top: insets.top, leading: insets.left, bottom: insets.bottom, trailing: insets.right)
     }
 
     @discardableResult
     public func attach(vertically: Offsetable? = nil,
                        horizontally: Offsetable? = nil) -> UIView {
-        return attach(top: vertically, left: horizontally, bottom: vertically, right: horizontally)
+        return attach(top: vertically, leading: horizontally, bottom: vertically, trailing: horizontally)
     }
 
     @discardableResult
     public func attach(sides: Set<Side>,
-                       _ offset: Offsetable = 0) -> UIView {
+                       _ offset: Offsetable = 0,
+                       respectingLayoutGuides: Bool = false) -> UIView {
         var top: Offsetable? = nil
-        var left: Offsetable? = nil
-        var right: Offsetable? = nil
+        var leading: Offsetable? = nil
         var bottom: Offsetable? = nil
+        var trailing: Offsetable? = nil
 
         sides.forEach { side in
             switch side {
             case .top:
                 top = offset
-            case .left:
-                left = offset
+            case .leading:
+                leading = offset
             case .bottom:
                 bottom = offset
-            case .right:
-                right = offset
+            case .trailing:
+                trailing = offset
             }
         }
 
-        return attach(top: top, left: left, bottom: bottom, right: right)
+        return attach(top: top, leading: leading, bottom: bottom, trailing: trailing)
     }
 
     @discardableResult
     public func attach(top: Offsetable? = nil,
-                       left: Offsetable? = nil,
+                       leading: Offsetable? = nil,
                        bottom: Offsetable? = nil,
-                       right: Offsetable? = nil) -> UIView {
-        guard top != nil || left != nil || bottom != nil || right != nil else {
+                       trailing: Offsetable? = nil) -> UIView {
+        guard top != nil || leading != nil || bottom != nil || trailing != nil else {
             assertionFailure("At least one Offset should be specified")
             return self
         }
@@ -118,9 +119,9 @@ extension UIView {
         Constraint.attach(self,
                           inside: superview,
                           top: top,
-                          left: left,
+                          leading: trailing,
                           bottom: bottom,
-                          right: right)
+                          trailing: trailing)
 
         return self
     }
@@ -195,10 +196,10 @@ extension UIView {
         let firstView: UIView
         let secondView: UIView
         switch direction {
-        case .above, .leftOf:
+        case .above, .leading:
             firstView = self
             secondView = view
-        case .below, .rightOf:
+        case .below, .trailing:
             firstView = view
             secondView = self
         }
@@ -365,8 +366,8 @@ extension UIView {
                                           using spacer: UIView) -> NSLayoutConstraint {
         switch side {
         case .bottom, .top:
-            attach(left: 0, right: 0)
-        case .left, .right:
+            attach(leading: 0, trailing: 0)
+        case .leading, .trailing:
             attach(top: 0, bottom: 0)
         }
 

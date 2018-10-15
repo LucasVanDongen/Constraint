@@ -227,12 +227,24 @@ public class Constraint {
     }
 
     @discardableResult
+    @available(*, deprecated, renamed: "attach(_:inside:top:leading:bottom:trailing:)", message: "Replaced by leading and trailing variant")
     public class func attach(_ view: UIView,
                              inside containingView: UIView,
                              top: Offsetable? = nil,
                              left: Offsetable? = nil,
                              bottom: Offsetable? = nil,
                              right: Offsetable? = nil) -> [NSLayoutConstraint] {
+        return attach(view, inside: containingView, top: top, leading: left, bottom: bottom, trailing: right)
+
+    }
+
+    @discardableResult
+    public class func attach(_ view: UIView,
+                             inside containingView: UIView,
+                             top: Offsetable? = nil,
+                             leading: Offsetable? = nil,
+                             bottom: Offsetable? = nil,
+                             trailing: Offsetable? = nil) -> [NSLayoutConstraint] {
         clean(views: [view, containingView])
         var constraints = [NSLayoutConstraint]()
 
@@ -252,16 +264,16 @@ public class Constraint {
             constraints.append(topConstraint)
         }
 
-        if let left = left {
-            let leftConstraint = NSLayoutConstraint(item: view,
-                                                    attribute: .left,
-                                                    relatedBy: left.relation.layoutRelation,
-                                                    toItem: containingView,
-                                                    attribute: .left,
-                                                    multiplier: 1,
-                                                    constant: left.offset)
-            leftConstraint.priority = left.priority
-            constraints.append(leftConstraint)
+        if let leading = leading {
+            let leadingConstraint = NSLayoutConstraint(item: view,
+                                                       attribute: .leading,
+                                                       relatedBy: leading.relation.layoutRelation,
+                                                       toItem: containingView,
+                                                       attribute: .leading,
+                                                       multiplier: 1,
+                                                       constant: leading.offset)
+            leadingConstraint.priority = leading.priority
+            constraints.append(leadingConstraint)
         }
 
         if let bottom = bottom {
@@ -280,16 +292,16 @@ public class Constraint {
             constraints.append(bottomConstraint)
         }
 
-        if let right = right {
-            let rightConstraint = NSLayoutConstraint(item: view,
-                                                     attribute: .right,
-                                                     relatedBy: right.relation.layoutRelation,
-                                                     toItem: containingView,
-                                                     attribute: .right,
-                                                     multiplier: 1,
-                                                     constant: -right.offset)
-            rightConstraint.priority = right.priority
-            constraints.append(rightConstraint)
+        if let trailing = trailing {
+            let trailingConstraint = NSLayoutConstraint(item: view,
+                                                        attribute: .trailing,
+                                                        relatedBy: trailing.relation.layoutRelation,
+                                                        toItem: containingView,
+                                                        attribute: .trailing,
+                                                        multiplier: 1,
+                                                        constant: -trailing.offset)
+            trailingConstraint.priority = trailing.priority
+            constraints.append(trailingConstraint)
         }
 
         NSLayoutConstraint.activate(constraints)
@@ -298,13 +310,13 @@ public class Constraint {
 
     @discardableResult
     public class func space(_ views: UIView...,
-                            inDirection direction: LayoutDirection,
-                            distance: CGFloat = 0,
-                            _ relation: Relation = .exactly,
-                            priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
+        inDirection direction: LayoutDirection,
+        distance: CGFloat = 0,
+        _ relation: Relation = .exactly,
+        priority: UILayoutPriority = .required) -> [NSLayoutConstraint] {
         clean(views: views)
-        let firstViewAttribute: NSLayoutConstraint.Attribute = direction == .horizontally ? .right : .bottom
-        let secondViewAttribute: NSLayoutConstraint.Attribute = direction == .horizontally ? .left : .top
+        let firstViewAttribute: NSLayoutConstraint.Attribute = direction == .horizontally ? .trailing : .bottom
+        let secondViewAttribute: NSLayoutConstraint.Attribute = direction == .horizontally ? .leading : .top
 
         return views.compactMap({ (view: UIView) -> (UIView, Int)? in
             guard let index = views.index(of: view) else {

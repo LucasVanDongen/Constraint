@@ -221,9 +221,9 @@ public class Constraint {
         return attach(view,
                       inside: containingView,
                       top: offset.layoutGuideRespecting,
-                      left: offset.layoutGuideRespecting,
+                      leading: offset.layoutGuideRespecting,
                       bottom: offset.layoutGuideRespecting,
-                      right: offset.layoutGuideRespecting)
+                      trailing: offset.layoutGuideRespecting)
     }
 
     @discardableResult

@@ -118,7 +118,7 @@ extension UIView {
         Constraint.attach(self,
                           inside: superview,
                           top: top,
-                          leading: trailing,
+                          leading: leading,
                           bottom: bottom,
                           trailing: trailing)
 

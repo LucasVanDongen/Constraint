@@ -54,7 +54,7 @@ extension UIView {
     @discardableResult
     @available(*, deprecated, renamed: "attach(sides:_:)", message: "Replaced by a version that uses Offsetable instead")
     public func attach(sides: Set<Side>,
-                       _ offset: CGFloat = 0,
+                       _ offset: CGFloat,
                        respectingLayoutGuides: Bool = false) -> UIView {
         let offsetable: Offsetable = respectingLayoutGuides ? offset.layoutGuideRespecting : offset
         return attach(sides: sides, offsetable)
@@ -78,8 +78,7 @@ extension UIView {
 
     @discardableResult
     public func attach(sides: Set<Side>,
-                       _ offset: Offsetable = 0,
-                       respectingLayoutGuides: Bool = false) -> UIView {
+                       _ offset: Offsetable = 0) -> UIView {
         var top: Offsetable? = nil
         var leading: Offsetable? = nil
         var bottom: Offsetable? = nil

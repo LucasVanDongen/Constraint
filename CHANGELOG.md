@@ -8,7 +8,7 @@ This is an inbetween version where we adapted the library to be better for inter
 - Swapped every specific left constraint for leading and right for trailing
 - .leftOf has been renamed to .leading and .rightOf to .trailing
 
-## 0.9.2
+## 0.9.3
 Bugfix
 
 - Fixed nasty bug where leading and trailing would be swapped

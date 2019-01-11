@@ -187,7 +187,7 @@ extension UIView {
                       _ view: UIView,
                       _ relation: Relation = .exactly,
                       priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
-        guard let superview = Constraint.determineSuperview(for: self, and: view) else {
+        guard let superview = try? Constraint.determineSharedSuperview(between: self, and: view) else {
             assertionFailure("These views should share a common superview")
             return self
         }

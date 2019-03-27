@@ -199,6 +199,12 @@ extension UIView {
     }
 
     @discardableResult
+    public func space(_ direction: SpaceDirection,
+                      _ view: UIView,
+                      _ relation: Relation = .exactly,
+                      priority: UILayoutPriority = UILayoutPriority.required) -> Self {
+        return space(0, direction, view, relation, priority: priority)
+    }
     public func space(_ distance: CGFloat,
                       _ direction: SpaceDirection,
                       _ view: UIView,

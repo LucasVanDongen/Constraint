@@ -27,7 +27,7 @@ extension UIView {
     @discardableResult
     @available(*, deprecated, renamed: "attach()", message: "Replaced by a simpler version of the function attach that does not ask for the parentView anymore")
     public func snap(inside parentView: UIView? = nil,
-                     offset: CGFloat = 0) -> UIView {
+                     offset: CGFloat = 0) -> Self {
         guard let parentView = parentView ?? superview else {
             assertionFailure("This view should either be added to a superview or have a parentView specified")
             return self
@@ -38,7 +38,7 @@ extension UIView {
     }
 
     @discardableResult
-    public func attach(offset: CGFloat = 0, respectingLayoutGuides: Bool = false) -> UIView {
+    public func attach(offset: CGFloat = 0, respectingLayoutGuides: Bool = false) -> Self {
         guard let superview = superview else {
             assertionFailure("This view should already have a superview")
             return self
@@ -54,7 +54,7 @@ extension UIView {
                        top: Offsetable? = nil,
                        leading: Offsetable? = nil,
                        bottom: Offsetable? = nil,
-                       trailing: Offsetable? = nil) -> UIView {
+                       trailing: Offsetable? = nil) -> Self {
         Constraint.attach(self,
                           inside: containingView,
                           top: top,
@@ -69,30 +69,30 @@ extension UIView {
     @available(*, deprecated, renamed: "attach(sides:_:)", message: "Replaced by a version that uses Offsetable instead")
     public func attach(sides: Set<Side>,
                        _ offset: CGFloat,
-                       respectingLayoutGuides: Bool = false) -> UIView {
+                       respectingLayoutGuides: Bool = false) -> Self {
         let offsetable: Offsetable = respectingLayoutGuides ? offset.layoutGuideRespecting : offset
         return attach(sides: sides, offsetable)
     }
 
     @discardableResult
-    public func attach(_ offset: CGFloat = 0) -> UIView {
+    public func attach(_ offset: Offsetable = 0) -> Self {
         return attach(top: offset, leading: offset, bottom: offset, trailing: offset)
     }
 
     @discardableResult
-    public func attach(with insets: UIEdgeInsets) -> UIView {
+    public func attach(with insets: UIEdgeInsets) -> Self {
         return attach(top: insets.top, leading: insets.left, bottom: insets.bottom, trailing: insets.right)
     }
 
     @discardableResult
     public func attach(vertically: Offsetable? = nil,
-                       horizontally: Offsetable? = nil) -> UIView {
+                       horizontally: Offsetable? = nil) -> Self {
         return attach(top: vertically, leading: horizontally, bottom: vertically, trailing: horizontally)
     }
 
     @discardableResult
     public func attach(sides: Set<Side>,
-                       _ offset: Offsetable = 0) -> UIView {
+                       _ offset: Offsetable = 0) -> Self {
         var top: Offsetable? = nil
         var leading: Offsetable? = nil
         var bottom: Offsetable? = nil
@@ -118,7 +118,7 @@ extension UIView {
     public func attach(top: Offsetable? = nil,
                        leading: Offsetable? = nil,
                        bottom: Offsetable? = nil,
-                       trailing: Offsetable? = nil) -> UIView {
+                       trailing: Offsetable? = nil) -> Self {
         guard top != nil || leading != nil || bottom != nil || trailing != nil else {
             assertionFailure("At least one Offset should be specified")
             return self
@@ -144,7 +144,7 @@ extension UIView {
     public func center(in viewToCenterIn: UIView? = nil,
                        axis: CenterAxis = .both,
                        adjusted: CGFloat = 0.0,
-                       priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+                       priority: UILayoutPriority = UILayoutPriority.required) -> Self {
         let parentView: UIView
         if let viewToCenterIn = viewToCenterIn {
             parentView = viewToCenterIn
@@ -163,7 +163,7 @@ extension UIView {
     @discardableResult
     public func center(axis: CenterAxis = .both,
                        adjusted: CGFloat = 0.0,
-                       priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+                       priority: UILayoutPriority = UILayoutPriority.required) -> Self {
         guard let superview = superview else {
             assertionFailure("You should either specify the containing view or have a superview set")
             return self
@@ -178,7 +178,7 @@ extension UIView {
     public func align(axis: CenterAxis,
                       to viewToAlignWith: UIView,
                       adjusted adjustment: CGFloat = 0.0,
-                      priority: UILayoutPriority = .required) -> UIView {
+                      priority: UILayoutPriority = .required) -> Self {
         guard let superview = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignWith) else {
             assertionFailure("These views should share a common superview")
             return self
@@ -200,7 +200,7 @@ extension UIView {
                       _ direction: SpaceDirection,
                       _ view: UIView,
                       _ relation: Relation = .exactly,
-                      priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+                      priority: UILayoutPriority = UILayoutPriority.required) -> Self {
         guard let superview = try? Constraint.determineSharedSuperview(between: self, and: view) else {
             assertionFailure("These views should share a common superview")
             return self
@@ -231,7 +231,7 @@ extension UIView {
     @discardableResult
     public func align(_ side: Side,
                       _ distance: CGFloat = 0,
-                      to viewToAlignTo: UIView) -> UIView {
+                      to viewToAlignTo: UIView) -> Self {
         guard let constraintParent = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignTo) else {
             assertionFailure("Should have a common parent")
             return self
@@ -244,7 +244,7 @@ extension UIView {
     @discardableResult
     public func align(_ sides: Set<Side>,
                       _ distance: CGFloat = 0,
-                      to viewToAlignTo: UIView) -> UIView {
+                      to viewToAlignTo: UIView) -> Self {
         guard let constraintParent = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignTo) else {
             assertionFailure("Should have a common parent")
             return self
@@ -260,7 +260,7 @@ extension UIView {
     @discardableResult
     public func align(sides: Set<Side>,
                       _ distance: CGFloat = 0,
-                      to viewToAlignTo: UIView) -> UIView {
+                      to viewToAlignTo: UIView) -> Self {
         guard let constraintParent = try? Constraint.determineSharedSuperview(between: self, and: viewToAlignTo) else {
             assertionFailure("Should have a common parent")
             return self
@@ -273,7 +273,7 @@ extension UIView {
     @discardableResult
     public func ratio(_ ratio: CGSize,
                       _ relation: Relation = .exactly,
-                      priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+                      priority: UILayoutPriority = UILayoutPriority.required) -> Self {
         addConstraint(Constraint.ratio(of: self, width: ratio.width, relatedToHeight: ratio.height))
 
         return self
@@ -283,7 +283,7 @@ extension UIView {
     public func ratio(of width: CGFloat,
                       to height: CGFloat = 1,
                       _ relation: Relation = .exactly,
-                      priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+                      priority: UILayoutPriority = UILayoutPriority.required) -> Self {
         addConstraint(Constraint.ratio(of: self, width: width, relatedToHeight: height))
 
         return self
@@ -293,7 +293,7 @@ extension UIView {
     public func height(relatedTo otherView: UIView,
                        multiplied multiplier: CGFloat = 1.0,
                        adjusted adjustment: CGFloat = 0.0,
-                       _ relation: Relation = .exactly) -> UIView {
+                       priority: UILayoutPriority = UILayoutPriority.required) -> Self {
         guard let viewToAddTo = try? Constraint.determineSharedSuperview(between: self, and: otherView) else {
             assertionFailure("They should share a node")
             return self
@@ -312,7 +312,7 @@ extension UIView {
     public func width(relatedTo otherView: UIView,
                       multiplied multiplier: CGFloat = 1.0,
                       adjusted adjustment: CGFloat = 0.0,
-                      _ relation: Relation = .exactly) -> UIView {
+                      _ relation: Relation = .exactly) -> Self {
         guard let viewToAddTo = try? Constraint.determineSharedSuperview(between: self, and: otherView) else {
             assertionFailure("Either one of them should be the parent")
             return self
@@ -330,7 +330,7 @@ extension UIView {
     @discardableResult
     public func size(_ size: CGSize,
                      widthRelation: Relation = .exactly,
-                     heightRelation: Relation = .exactly) -> UIView {
+                     heightRelation: Relation = .exactly) -> Self {
         addConstraints([
             Constraint.width(size.width, widthRelation, for: self),
             Constraint.height(size.height, heightRelation, for: self)
@@ -343,7 +343,7 @@ extension UIView {
     public func size(width: CGFloat,
                      _ widthRelation: Relation = .exactly,
                      height: CGFloat,
-                     _ heightRelation: Relation = .exactly) -> UIView {
+                     _ heightRelation: Relation = .exactly) -> Self {
         addConstraints([
             Constraint.width(width, widthRelation, for: self),
             Constraint.height(height, heightRelation, for: self)
@@ -355,7 +355,7 @@ extension UIView {
     @discardableResult
     public func width(_ width: CGFloat,
                       _ relation: Relation = .exactly,
-                      priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+                      priority: UILayoutPriority = UILayoutPriority.required) -> Self {
         addConstraints([
             Constraint.width(width, relation, for: self, priority: priority)
             ])
@@ -366,7 +366,7 @@ extension UIView {
     @discardableResult
     public func height(_ height: CGFloat,
                        _ relation: Relation = .exactly,
-                       priority: UILayoutPriority = UILayoutPriority.required) -> UIView {
+                       priority: UILayoutPriority = UILayoutPriority.required) -> Self {
         addConstraints([
             Constraint.height(height, relation, for: self, priority: priority)
             ])

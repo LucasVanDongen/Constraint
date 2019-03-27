@@ -320,6 +320,7 @@ extension UIView {
     @discardableResult
     public func width(relatedTo otherView: UIView,
                       multiplied multiplier: CGFloat = 1.0,
+                      priority: UILayoutPriority = UILayoutPriority.required,
                       adjusted adjustment: CGFloat = 0.0,
                       _ relation: Relation = .exactly) -> Self {
         guard let viewToAddTo = try? Constraint.determineSharedSuperview(between: self, and: otherView) else {
@@ -330,6 +331,7 @@ extension UIView {
         viewToAddTo.addConstraint(Constraint.width(of: self,
                                                    relatedTo: otherView,
                                                    multiplied: multiplier,
+                                                   priority: priority,
                                                    adjusted: adjustment,
                                                    relation))
 

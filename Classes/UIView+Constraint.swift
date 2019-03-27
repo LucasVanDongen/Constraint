@@ -11,6 +11,20 @@ import UIKit
 extension UIView {
 
     @discardableResult
+    /**
+     Adds the UIView as a subview to the view you specify
+
+     - parameters:
+     - view: the view to add this view as a subview to
+
+     - Returns: a reference of the view you call this function on to allow chaining
+     */
+    public func addedAsSubview(to view: UIView) -> Self {
+        view.addSubview(self)
+        return self
+    }
+
+    @discardableResult
     @available(*, deprecated, renamed: "attach()", message: "Replaced by a simpler version of the function attach that does not ask for the parentView anymore")
     public func snap(inside parentView: UIView? = nil,
                      offset: CGFloat = 0) -> UIView {

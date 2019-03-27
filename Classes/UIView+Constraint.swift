@@ -44,7 +44,10 @@ extension UIView {
             return self
         }
 
-        Constraint.attach(self, inside: superview, offset: offset)
+        Constraint.attach(self,
+                          inside: superview,
+                          offset: offset,
+                          respectingLayoutGuides: respectingLayoutGuides)
         return self
     }
 

@@ -32,6 +32,12 @@ If you want to save a certain `Offset` for reuse you can do that like this:
 let offset = 0.orMore.defaultLowPrioritized.respectingLayoutGuides
 ```
 It's possible to respect any layout guide (like iPhone X's Safe Area) by using `respectingLayoutGuide` / `layoutGuideRespecting`
+### On an array of UIViews
+It's also possible to work with arrays of views. For example it's now possible to space an array in a certain direction or to attach them all to their parentviews. The most used function is simply to add them as subviews:
+
+`[view1, view2, view3].addedAsSubviews(to: superView).attach()`
+
+As you see this method is also fluent.
 
 ### As a generator for constraints
 Sometimes you need to store the constraints that are generated. In this case you need to call the static methods on the `Constraint` class directly as follows:

@@ -41,7 +41,7 @@ extension Array where Element: UIView {
                       _ direction: LayoutDirection,
                       relation: Relation = .exactly,
                       priority: UILayoutPriority = .required) -> [Element] {
-        self.reduce(nil) { (previousView: Element?, view: Element) -> Element? in
+        _ = self.reduce(nil) { (previousView: Element?, view: Element) -> Element? in
             guard let viewToSpaceOff = previousView else {
                 return view
             }

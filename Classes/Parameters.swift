@@ -162,6 +162,13 @@ public enum SpaceDirection {
 public enum LayoutDirection {
     case vertically
     case horizontally
+
+    var spaceDirection: SpaceDirection {
+        switch self {
+        case .vertically: return .below
+        case .horizontally: return .trailing
+        }
+    }
 }
 
 public enum AlignmentType {

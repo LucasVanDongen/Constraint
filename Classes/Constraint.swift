@@ -323,7 +323,7 @@ public class Constraint {
         let secondViewAttribute: NSLayoutConstraint.Attribute = direction == .horizontally ? .leading : .top
 
         return views.compactMap({ (view: UIView) -> (UIView, Int)? in
-            guard let index = views.index(of: view) else {
+            guard let index = views.firstIndex(of: view) else {
                 return nil
             }
             return (view, index)

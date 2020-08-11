@@ -223,12 +223,14 @@ extension UIView {
 
      - parameters:
      - axis: Can be `.x`, `.y` or `.both`
-     - adjusted: The amount of points the center is shifted, a positive value means it's moving towards the trailing and/or bottom edge and a negative value will shift it top the top and/or leading edge
+     - `relation`: Allows you to adjust the centering in a given direction
+     - `adjusted`: The amount of points the center is shifted, a positive value means it's moving towards the trailing and/or bottom edge and a negative value will shift it top the top and/or leading edge
      - priority: The priority given to these constraints
 
      - Returns: a reference of the view you call this function on to allow chaining
      */
     public func center(axis: CenterAxis = .both,
+                       relation: NSLayoutConstraint.Relation = .equal,
                        adjusted: CGFloat = 0.0,
                        priority: UILayoutPriority = UILayoutPriority.required) -> Self {
         guard let superview = superview else {
@@ -236,7 +238,7 @@ extension UIView {
             return self
         }
 
-        Constraint.center(self, in: superview, axis: axis, adjusted: adjusted, priority: priority)
+        Constraint.center(self, in: superview, axis: axis, relation: relation, adjusted: adjusted, priority: priority)
 
         return self
     }

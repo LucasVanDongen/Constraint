@@ -288,9 +288,9 @@ public class Constraint {
             case .exactly:
                 bottomConstraint = view.bottomAnchor.constraint(equalTo: margins, constant: -bottom.offset)
             case .orLess:
-                bottomConstraint = view.bottomAnchor.constraint(lessThanOrEqualTo: margins, constant: -bottom.offset)
-            case .orMore:
                 bottomConstraint = view.bottomAnchor.constraint(greaterThanOrEqualTo: margins, constant: -bottom.offset)
+            case .orMore:
+                bottomConstraint = view.bottomAnchor.constraint(lessThanOrEqualTo: margins, constant: -bottom.offset)
             }
             bottomConstraint.priority = bottom.priority
             constraints.append(bottomConstraint)
@@ -299,7 +299,7 @@ public class Constraint {
         if let trailing = trailing {
             let trailingConstraint = NSLayoutConstraint(item: view,
                                                         attribute: .trailing,
-                                                        relatedBy: trailing.relation.layoutRelation,
+                                                        relatedBy: trailing.relation.reversedLayoutRelation,
                                                         toItem: containingView,
                                                         attribute: .trailing,
                                                         multiplier: 1,

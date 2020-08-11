@@ -445,6 +445,11 @@ extension UIView {
     public func ratio(_ ratio: CGSize,
                       _ relation: Relation = .exactly,
                       priority: UILayoutPriority = UILayoutPriority.required) -> Self {
+        guard ratio.width > 0.0 && ratio.height > 0.0 else {
+            assertionFailure("width or height cannot be 0.0 when using a `CGRect` for a ration")
+            return self
+        }
+    
         addConstraint(Constraint.ratio(of: self, width: ratio.width, relatedToHeight: ratio.height))
 
         return self
@@ -466,7 +471,11 @@ extension UIView {
                       to height: CGFloat = 1,
                       _ relation: Relation = .exactly,
                       priority: UILayoutPriority = UILayoutPriority.required) -> Self {
-        addConstraint(Constraint.ratio(of: self, width: width, relatedToHeight: height))
+        guard width > 0.0 && height > 0.0 else {
+            assertionFailure("width or height cannot be 0.0 or less for a ratio")
+            return self
+        }
+        addConstraint(Constraint.ratio(of: self, width: width, relatedToHeight: height, priority: priority))
 
         return self
     }

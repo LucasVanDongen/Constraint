@@ -195,16 +195,19 @@ public class Constraint {
     public class func ratio(of view: UIView,
                             width: CGFloat,
                             _ relation: NSLayoutConstraint.Relation = .equal,
-                            relatedToHeight height: CGFloat) -> NSLayoutConstraint {
+                            relatedToHeight height: CGFloat,
+                            priority: UILayoutPriority = .required) -> NSLayoutConstraint {
         let multiplier = width / height
         clean(views: [view])
-        return NSLayoutConstraint(item: view,
-                                  attribute: .width,
-                                  relatedBy: relation,
-                                  toItem: view,
-                                  attribute: .height,
-                                  multiplier: multiplier,
-                                  constant: 0)
+        let constraint = NSLayoutConstraint(item: view,
+                                            attribute: .width,
+                                            relatedBy: relation,
+                                            toItem: view,
+                                            attribute: .height,
+                                            multiplier: multiplier,
+                                            constant: 0)
+        constraint.priority = priority
+        return constraint
     }
 
     @available(*, deprecated, renamed: "attach", message: "Replaced by attach")

@@ -326,20 +326,27 @@ extension UIView {
 
         let firstView: UIView
         let secondView: UIView
+        let finalRelation: Relation
+        let finalDistance: CGFloat
+
         switch direction {
         case .above, .leading:
             firstView = self
             secondView = view
+            finalRelation = relation
+            finalDistance = distance
         case .below, .trailing:
             firstView = view
             secondView = self
+            finalRelation = relation.reversed
+            finalDistance = distance
         }
 
         let constraints = Constraint.space(firstView,
                                            secondView,
                                            inDirection: direction.layoutDirection,
-                                           distance: distance,
-                                           relation,
+                                           distance: finalDistance,
+                                           finalRelation,
                                            priority: priority)
         superview.addConstraints(constraints)
 

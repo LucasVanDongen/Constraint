@@ -278,4 +278,15 @@ public enum Relation {
             return .lessThanOrEqual
         }
     }
+
+    var reversed: Self {
+        switch self {
+        case .exactly:
+            return .exactly
+        case .orLess:
+            return .orMore
+        case .orMore:
+            return .orLess
+        }
+    }
 }

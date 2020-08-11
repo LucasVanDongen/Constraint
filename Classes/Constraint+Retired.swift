@@ -30,8 +30,7 @@ extension Constraint {
                                               attribute: attributes.inAttribute,
                                               multiplier: 1.0,
                                               constant: 0)
-        inConstraint.priority = UILayoutPriority(rawValue: 250)
-
+        inConstraint.priority = .defaultLow
         superView.addConstraints([inConstraint, outConstraint])
 
         return inConstraint

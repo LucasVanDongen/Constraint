@@ -71,6 +71,7 @@ public class Constraint {
     public class func center(_ viewToCenter: UIView,
                              in viewToCenterTo: UIView,
                              axis: CenterAxis = .both,
+                             relation: NSLayoutConstraint.Relation = .equal,
                              adjusted: CGFloat = 0.0,
                              priority: UILayoutPriority = .required) {
         clean(views: [viewToCenter, viewToCenterTo])
@@ -78,7 +79,7 @@ public class Constraint {
         if axis != .y {
             let alignXConstraint = NSLayoutConstraint(item: viewToCenter,
                                                       attribute: .centerX,
-                                                      relatedBy: .equal,
+                                                      relatedBy: relation,
                                                       toItem: viewToCenterTo,
                                                       attribute: .centerX,
                                                       multiplier: 1.0,
@@ -90,7 +91,7 @@ public class Constraint {
         if axis != .x {
             let alignYConstraint = NSLayoutConstraint(item: viewToCenter,
                                                       attribute: .centerY,
-                                                      relatedBy: .equal,
+                                                      relatedBy: relation,
                                                       toItem: viewToCenterTo,
                                                       attribute: .centerY,
                                                       multiplier: 1.0,

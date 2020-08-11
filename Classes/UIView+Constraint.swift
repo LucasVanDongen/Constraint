@@ -218,27 +218,6 @@ extension UIView {
     }
 
     @discardableResult
-    @available(*, deprecated, renamed: "center(axis:adjusted:priority:)", message: "Replaced by a simpler version of the function center that does not ask for the viewToCenterIn anymore")
-    public func center(in viewToCenterIn: UIView? = nil,
-                       axis: CenterAxis = .both,
-                       adjusted: CGFloat = 0.0,
-                       priority: UILayoutPriority = UILayoutPriority.required) -> Self {
-        let parentView: UIView
-        if let viewToCenterIn = viewToCenterIn {
-            parentView = viewToCenterIn
-        } else {
-            guard let superview = superview else {
-                assertionFailure("You should either specify the containing view or have a superview set")
-                return self
-            }
-            parentView = superview
-        }
-        Constraint.center(self, in: parentView, axis: axis, adjusted: adjusted, priority: priority)
-
-        return self
-    }
-
-    @discardableResult
     /**
      Adds layouts that centers the view on one or more axis of it's parent view
 

@@ -1,5 +1,5 @@
 PODS:
-  - Constraint (0.1.0)
+  - Constraint (0.9.4)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
@@ -11,7 +11,7 @@ DEPENDENCIES:
   - FBSnapshotTestCase (~> 2.1.4)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - FBSnapshotTestCase
 
 EXTERNAL SOURCES:
@@ -19,9 +19,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Constraint: 40ee00ee019ee038193e14860324a5c6d6dd63b3
+  Constraint: 73782f186cc72b2e5e9efb7464eb02a1d791ec3f
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
 
-PODFILE CHECKSUM: 0fd00a369d54f5082d9eaccfb962c5fe5e74d8da
+PODFILE CHECKSUM: 5152d139663cc73362c4cfe79d571d21c2e292a6
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.4

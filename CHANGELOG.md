@@ -26,6 +26,16 @@ Bugfix
 	- `attach` now passes `respectingLayoutGuides` properly
 	- `width` can have a priority now
 
+## 0.9.5
+- Update to Swift 5
+- Fixed bug where the relation had to be reversed for `.below` and `.trailing` spacing
+- Added functions to size arrays of elements like `width`, `height` and `ratio`
+- `center` now can have a relation (less/more)
+- `ratio` can have a priority now
+- Fixed a bug in bottom constraints with a relation
+- Added `addedAsArrangedSubview` to chain functions on views you want to add to `UIStackView`s
+- When a `.zero` `CGSize` is used for determining a ratio your application does not longer crash
+
 Planned
 -------
 - Adding spaceUnnatural() for being able to space .leftOf and .rightOf again

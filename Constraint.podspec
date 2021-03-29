@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'Constraint'
-  s.version          = '0.9.5'
+  s.version          = '0.9.6'
   s.summary          = 'Constraint is a simple Swift wrapper for iOS Auto Layout that has a very natural syntax.'
 
 # This description is used to generate tags and improve search results.
@@ -18,26 +18,17 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-Constraint is a simple Swift wrapper for iOS Auto Layout that has a very natural syntax. You can either create layouts directly using the `Constraint` class methods or use the extensions on `UIView` related classes.
+Constraint is a simple Swift wrapper for iOS Auto Layout that has a very natural syntax. You can either create layouts directly using the `Constraint` class methods or use the extensions on `UIView`.
                        DESC
 
   s.homepage         = 'https://github.com/lucasvandongen/Constraint'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'lucasvandongen' => 'lucas.van.dongen@gmail.com' }
+  s.author           = { 'lucasvandongen' => 'me@lucasvandongen.dev' }
   s.source           = { :git => 'https://github.com/lucasvandongen/Constraint.git', :tag => s.version.to_s }
   s.swift_version = '5.0'
   s.social_media_url = 'https://twitter.com/LucasVanDongen'
 
   s.platform = :ios, '9.0'
 
-  s.source_files = 'Classes/**/*.swift'
-  
-  # s.resource_bundles = {
-  #   'Constraint' => ['Constraint/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.source_files = 'Sources/Constraint/**/*.swift'
 end

@@ -183,17 +183,21 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 * iOS
 
 ## Installation
+Constraint is available through [CocoaPods](https://cocoapods.org) or as a [Swift Package](https://swift.org/package-manager/).
 
-Constraint is available through [CocoaPods](https://cocoapods.org). To install
+### Cocoapods
+To install
 it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'Constraint'
 ```
 
+### SPM
+
 ## Author
 
-lucasvandongen, lucas.van.dongen@gmail.com
+Built for [Blue Rhizome](https://bluerhizome.com) by Lucas van Dongen, <me@lucasvandongen.com>
 
 ## License
 

@@ -600,7 +600,7 @@ extension UIView {
                      multiplied multiplier: CGFloat = 1.0,
                      priority: UILayoutPriority = UILayoutPriority.required,
                      adjusted adjustment: CGFloat = 0.0,
-                     _ relation: Relation = .exactly) -> UIView {
+                     _ relation: Relation = .exactly) -> Self {
         guard let viewToAddTo = try? Constraint.determineSharedSuperview(between: self, and: otherView) else {
             assertionFailure("Either one of them should be the parent")
             return self

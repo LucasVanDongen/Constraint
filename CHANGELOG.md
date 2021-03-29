@@ -34,10 +34,13 @@ Bugfix
 - `ratio` can have a priority now
 - Fixed a bug in bottom constraints with a relation
 - Added `addedAsArrangedSubview` to chain functions on views you want to add to `UIStackView`s
-- When a `.zero` `CGSize` is used for determining a ratio your application does not longer crash
+- When a `.zero`  `CGSize` is used for determining a ratio your application does not longer crash
+
+## 0.9.6
+- Added SPM (Swift Package Manager) support
 
 Planned
 -------
 - Adding spaceUnnatural() for being able to space .leftOf and .rightOf again
 - Adding attachUnnatural() to allow to attach to .left and .right again
-- Make sure missing 
+- Easier syntax for capturing multiple constraints, deprecation of direct access to `Constraint` functions

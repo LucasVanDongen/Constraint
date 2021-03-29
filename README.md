@@ -194,6 +194,13 @@ pod 'Constraint'
 ```
 
 ### SPM
+* Open the project you want to add the dependency to
+* Go to `File` > `Swift Packages` > `Add Package Dependency`
+* Enter `https://github.com/LucasVanDongen/Constraint` in the `Enter package repository URL` textfield
+* Click `Next`
+* Change the version you want or leave it as is
+* Click `Next`
+* Once it's done installing tap `Finish` 
 
 ## Author
 

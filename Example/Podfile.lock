@@ -1,5 +1,5 @@
 PODS:
-  - Constraint (0.9.4)
+  - Constraint (0.9.6)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
@@ -19,7 +19,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Constraint: 73782f186cc72b2e5e9efb7464eb02a1d791ec3f
+  Constraint: 9c659b56e1da63651074d3593be3154b25f5b6fd
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
 
 PODFILE CHECKSUM: 5152d139663cc73362c4cfe79d571d21c2e292a6

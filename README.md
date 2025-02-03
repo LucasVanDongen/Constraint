@@ -165,33 +165,53 @@ Alternatively, you can also call it with a `CGRect`. This is very handy if you w
 
 ```swift
 view.ratio(avatarImage.size)
-``` 
+```
+
+## UIViewController API
+With vanilla `UIKit` nesting ViewControllers requires an even bigger amount of effort, taking at least three lines of code before even getting to the point where you can start to set up your constraints:
+
+```swift
+addChild(viewController)
+parentView.addSubview(viewController.view)
+viewController.didMove(toParent: self)
+```
+
+Without `Constraint` you would add at least another five lines of NSLayoutConstraint code to just align the edges to the parent view:
+
+```swift
+viewController.view.translatesAutoresizingMaskIntoConstraints = false
+
+viewController.view.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+viewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+viewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+viewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+```
+
+When decomposing your Views into smaller Subviews is so hard, it's not very unexpected that many UIKit developers tend to put so much stuff into one ViewController. It's very disencouraging to do the right thing. 
+
+### `embed`
+The `embed` function takes away a lot of the boiler plate code. Embedding ViewControllers now looks like this:
+
+```
+embed(viewController: childViewController) // Was: 3 lines of code to add the child
+    .attach()                              // Was: 5 lines of code to align the child
+```
+
+When it gets that easy to add child ViewControllers, you will use it way more often.
 
 ## Known issues and TODO's
-This is the `0.1` release of this library but it already has been used in a few projects internally and all of the major kinks have been worked out. The following issues exist:
-
-* Not all class funcs on `Constraint` return `NSLayoutConstraint` or `[NSLayoutConstraint]` yet
-* The Fluent API hasn't been used everywhere yet
-* The API might undergo some name changes or get improved parameters
+This is the `0.9` release of this library but it already has been used in a few projects internally and all of the major kinks have been worked out. The last major hurdle for full functionality is being able to capture all created constraints, so they can be turned on and off programmatically.
 
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
-* Swift 4
-* iOS
+* Swift 4 or higher
+* iOS (or related platforms)
 
 ## Installation
-Constraint is available through [CocoaPods](https://cocoapods.org) or as a [Swift Package](https://swift.org/package-manager/).
-
-### Cocoapods
-To install
-it, simply add the following line to your Podfile:
-
-```ruby
-pod 'Constraint'
-```
+Constraint is available through [Swift Package](https://swift.org/package-manager/). [CocoaPods](https://cocoapods.org) support still exists, but will be less frequently updated.
 
 ### SPM
 * Open the project you want to add the dependency to
@@ -200,11 +220,19 @@ pod 'Constraint'
 * Click `Next`
 * Change the version you want or leave it as is
 * Click `Next`
-* Once it's done installing tap `Finish` 
+* Once it's done installing tap `Finish`
+
+### Cocoapods
+To install
+it, simply add the following line to your Podfile:
+
+```ruby
+pod 'Constraint'
+``` 
 
 ## Author
 
-Built for [Blue Rhizome](https://bluerhizome.com) by Lucas van Dongen, <me@lucasvandongen.com>
+Built for [Blue Rhizome](https://bluerhizome.com) by Lucas van Dongen, <me@lucasvandongen.dev> @ [`lucasvandongen.dev`](https://lucasvandongen.dev) 
 
 ## License
 
